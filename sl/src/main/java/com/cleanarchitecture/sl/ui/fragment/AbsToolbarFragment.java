@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ import static com.cleanarchitecture.common.ui.BaseSnackbar.MESSAGE_TYPE_WARNING;
  */
 
 public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentFragment<M>
-        implements ToolbarFragment, View.OnClickListener, ObservableSubscriber<Intent> {
+        implements ToolbarFragment, View.OnClickListener {
 
     private static final String NAME = AbsToolbarFragment.class.getName();
 
@@ -56,6 +57,8 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
     private Toolbar mToolbar;
     private ImageView mMenu;
     private ImageView mItem;
+    private EditText mEdit;
+    private TextView mTitle;
     private int mMenuId = 0;
     private PopupMenu mPopupMenu;
     private boolean mPopupMenuShow = false;
@@ -77,6 +80,10 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
         if (mItem != null) {
             mItem.setOnClickListener(this);
         }
+
+        mEdit = findView(R.id.toolbar_edit);
+
+        mTitle = findView(R.id.toolbar_title);
 
         final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
@@ -106,9 +113,13 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
     @Override
     public void setTitle(String title) {
         if (validate()) {
-            final TextView view = mToolbar.findViewById(R.id.toolbar_title);
-            if (view != null) {
-                view.setText(title);
+            if (mTitle != null) {
+                mTitle.setText(title);
+                mTitle.setVisibility(View.VISIBLE);
+            }
+
+            if (mEdit != null) {
+                mEdit.setVisibility(View.INVISIBLE);
             }
         }
     }
@@ -134,15 +145,6 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
                 }
             }
         }
-    }
-
-    private void onConnect() {
-        setToolbarColor(getPrimaryColor());
-    }
-
-    private void onDisconnect() {
-        setToolbarColor(getAccentColor());
-        SLUtil.getActivityUnion().showSnackbar(new ShowMessageEvent(getString(R.string.network_disconnected), MESSAGE_TYPE_WARNING));
     }
 
     @Override
@@ -240,24 +242,17 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
     }
 
     @Override
-    public List<String> getObservable() {
-        return StringUtils.arrayToList(NetworkBroadcastReceiverObservable.NAME);
-    }
-
-    @Override
-    public void onChange(Intent intent) {
+    public void setEdit(final String text, final boolean isVisible) {
         if (validate()) {
-            if (Connectivity.isNetworkConnected(ApplicationModule.getInstance())) {
-                onConnect();
-            } else {
-                onDisconnect();
+            if (mEdit != null) {
+                mEdit.setText(text);
+                mEdit.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
+            }
+
+            if (!isVisible && mTitle != null) {
+                mTitle.setVisibility(View.VISIBLE);
             }
         }
-    }
-
-    @Override
-    public List<String> getModuleSubscription() {
-        return StringUtils.arrayToList(super.getModuleSubscription(), ObservableUnion.NAME);
     }
 
 

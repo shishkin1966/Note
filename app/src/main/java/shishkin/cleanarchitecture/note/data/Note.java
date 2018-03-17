@@ -3,6 +3,8 @@ package shishkin.cleanarchitecture.note.data;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import com.cleanarchitecture.sl.data.AbsEntity;
@@ -13,7 +15,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 @Entity(tableName = Note.TABLE)
-public class Note extends AbsEntity {
+public class Note extends AbsEntity implements Parcelable {
 
     public static final String TABLE = "Note";
 
@@ -87,4 +89,36 @@ public class Note extends AbsEntity {
     public void setNote(String note) {
         this.mNote = note;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.mId);
+        dest.writeValue(this.mCreated);
+        dest.writeValue(this.mModified);
+        dest.writeString(this.mNote);
+    }
+
+    protected Note(Parcel in) {
+        this.mId = (Long) in.readValue(Long.class.getClassLoader());
+        this.mCreated = (Long) in.readValue(Long.class.getClassLoader());
+        this.mModified = (Long) in.readValue(Long.class.getClassLoader());
+        this.mNote = in.readString();
+    }
+
+    public static final Parcelable.Creator<Note> CREATOR = new Parcelable.Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel source) {
+            return new Note(source);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
 }

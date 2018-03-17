@@ -44,6 +44,7 @@
                 android:textSize="@dimen/text_size_xxlarge"/>
 
             <LinearLayout
+                android:id="@+id/right_toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
@@ -69,6 +70,22 @@
                     app:srcCompat="@drawable/dots_vertical"/>
 
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/toolbar_edit"
+                style="@style/EditTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_toEndOf="@+id/back"
+                android:layout_toLeftOf="@+id/right_toolbar"
+                android:layout_toRightOf="@+id/back"
+                android:layout_toStartOf="@+id/right_toolbar"
+                android:visibility="invisible"/>
+
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>

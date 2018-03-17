@@ -58,4 +58,12 @@ public interface ToolbarFragment {
      */
     void setItem(final int itemId, final boolean isVisible);
 
+    /**
+     * Установить EditText
+     *
+     * @param text    текст
+     * @param isVisible выдимость элемента
+     */
+    void setEdit(final String text, final boolean isVisible);
+
 }
