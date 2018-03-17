@@ -62,7 +62,7 @@ public interface ToolbarFragment {
     /**
      * Установить EditText
      *
-     * @param text    текст
+     * @param text      текст
      * @param isVisible выдимость элемента
      */
     void setEdit(final String text, final boolean isVisible);
@@ -70,13 +70,12 @@ public interface ToolbarFragment {
     /**
      * Установить hint EditText
      *
-     * @param hint    текст
+     * @param hint текст
      */
     void setHint(final String hint);
 
     /**
      * Получить EditText заголовка
-     *
      */
     EditText getEdit();
 }

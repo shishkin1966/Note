@@ -1,7 +1,6 @@
 package com.cleanarchitecture.sl.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.graphics.drawable.VectorDrawableCompat;
@@ -20,26 +19,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cleanarchitecture.common.net.Connectivity;
-import com.cleanarchitecture.common.utils.StringUtils;
 import com.cleanarchitecture.sl.R;
-import com.cleanarchitecture.sl.event.ui.ShowMessageEvent;
 import com.cleanarchitecture.sl.model.AbsModel;
-import com.cleanarchitecture.sl.observe.impl.NetworkBroadcastReceiverObservable;
-import com.cleanarchitecture.sl.sl.ApplicationModule;
 import com.cleanarchitecture.sl.sl.ErrorModule;
-import com.cleanarchitecture.sl.sl.ObservableSubscriber;
-import com.cleanarchitecture.sl.sl.ObservableUnion;
-import com.cleanarchitecture.sl.sl.SLUtil;
 
 
 import java.lang.reflect.Field;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-
-import static com.cleanarchitecture.common.ui.BaseSnackbar.MESSAGE_TYPE_WARNING;
 
 /**
  * Created by Shishkin on 18.11.2017.

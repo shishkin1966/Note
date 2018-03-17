@@ -5,32 +5,26 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
-import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
-import com.github.clans.fab.FloatingActionButton;
 import com.google.gson.Gson;
 
 
 import shishkin.cleanarchitecture.note.R;
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.data.NoteJson;
-import shishkin.cleanarchitecture.note.screen.notes.NotesModel;
 
 /**
  * Created by Shishkin on 17.03.2018.
  */
 
-public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.OnFocusChangeListener{
+public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.OnFocusChangeListener {
 
     public static final String OPERATION_INSERT = "OPERATION_INSERT";
     public static final String OPERATION_EDIT = "OPERATION_EDIT";
@@ -124,7 +118,7 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (hasFocus) {
-            mCurrent = (EditText)v;
+            mCurrent = (EditText) v;
         }
     }
 }
