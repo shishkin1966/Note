@@ -13,17 +13,17 @@ import shishkin.cleanarchitecture.note.mail.OnChangeNoteMail;
  * Created by Shishkin on 17.03.2018.
  */
 
-public class UpdateNoteRequest extends AbsRequest {
+public class RemoveNoteRequest extends AbsRequest {
 
     private Note mNote;
 
-    public UpdateNoteRequest(Note note) {
+    public RemoveNoteRequest(Note note) {
         mNote = note;
     }
 
     @Override
     public String getName() {
-        return UpdateNoteRequest.class.getName();
+        return RemoveNoteRequest.class.getName();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class UpdateNoteRequest extends AbsRequest {
 
         try {
             final NotesDb db = SLUtil.getDb();
-            db.NoteDao().update(mNote);
+            db.NoteDao().delete(mNote);
 
             SLUtil.addMail(new OnChangeNoteMail());
         } catch (Exception e) {

@@ -33,4 +33,5 @@ public class NotesRouter extends BaseModelRouter {
     public void showNote(Note note) {
         showFragment(NoteFragment.newInstance(note));
     }
+
 }

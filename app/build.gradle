@@ -32,10 +32,6 @@ android {
         }
     }
 
-    dexOptions {
-        incremental true
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -57,4 +53,7 @@ dependencies {
 
     // FAB
     compile 'com.github.clans:fab:1.6.4'
+
+    // добавление ripple эффекта
+    compile 'com.balysv:material-ripple:1.0.2'
 }

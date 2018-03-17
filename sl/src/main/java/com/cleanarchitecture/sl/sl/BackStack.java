@@ -140,7 +140,7 @@ public class BackStack {
                 }
             }
         } else {
-            activity.getParent().onBackPressed();
+            activity.onActivityBackPressed();
         }
     }
 

@@ -2,18 +2,27 @@ package shishkin.cleanarchitecture.note.screen.notes;
 
 import android.view.View;
 
+import com.cleanarchitecture.common.utils.SafeUtils;
+import com.cleanarchitecture.sl.data.Result;
+import com.cleanarchitecture.sl.event.ui.ShowErrorMessageEvent;
 import com.cleanarchitecture.sl.presenter.AbsPresenter;
+import com.cleanarchitecture.sl.request.ResponseListener;
+import com.cleanarchitecture.sl.sl.SLUtil;
+
+
+import java.util.List;
 
 
 import shishkin.cleanarchitecture.note.R;
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.mail.OnDataChangeListener;
+import shishkin.cleanarchitecture.note.request.GetNotesRequest;
 
 /**
  * Created by Shishkin on 17.03.2018.
  */
 
-public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnClickListener, OnDataChangeListener {
+public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnClickListener, OnDataChangeListener, ResponseListener {
 
     public static final String NAME = NotesPresenter.class.getName();
 
@@ -45,7 +54,27 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
     }
 
     @Override
+    public void onStart() {
+        SLUtil.getActivityUnion().showProgressBar();
+
+        getModel().getInteractor().getNotes(NAME);
+    }
+
+
+    @Override
     public void onChange(String table) {
-        getModel().getView().refreshData();
+        onStart();
+    }
+
+    @Override
+    public void response(Result result) {
+        SLUtil.getActivityUnion().hideProgressBar();
+        if (result.hasError()) {
+            SLUtil.getActivityUnion().showErrorMessage(new ShowErrorMessageEvent(result));
+        } else {
+            if (result.getName().equals(GetNotesRequest.NAME)) {
+                getModel().getView().setItems(SafeUtils.cast(result.getData()));
+            }
+        }
     }
 }

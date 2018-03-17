@@ -37,10 +37,7 @@ public class InsertNoteRequest extends AbsRequest {
 
         try {
             final NotesDb db = SLUtil.getDb();
-            db.beginTransaction();
             db.NoteDao().insert(mNote);
-            db.setTransactionSuccessful();
-            db.endTransaction();
 
             SLUtil.addMail(new OnChangeNoteMail());
         } catch (Exception e) {

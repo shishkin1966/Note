@@ -12,6 +12,7 @@ public class NotesModel extends AbsModel {
         super(fragment);
 
         setRouter(new NotesRouter(this));
+        setInteractor(new NotesInteractor());
         setPresenter(new NotesPresenter(this));
     }
 
@@ -24,4 +25,10 @@ public class NotesModel extends AbsModel {
     public NotesRouter getRouter() {
         return super.getRouter();
     }
+
+    @Override
+    public NotesInteractor getInteractor() {
+        return super.getInteractor();
+    }
+
 }

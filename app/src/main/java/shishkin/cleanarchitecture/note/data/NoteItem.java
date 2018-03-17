@@ -9,9 +9,25 @@ import com.google.gson.annotations.SerializedName;
 public class NoteItem {
 
     @SerializedName("title")
-    private String mTtile;
+    private String mTitle;
 
     @SerializedName("checked")
-    private boolean mItems;
+    private boolean mChecked;
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
+
+    public boolean isChecked() {
+        return mChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.mChecked = checked;
+    }
 
 }

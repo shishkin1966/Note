@@ -11,8 +11,9 @@
     <string name="error_lock_keystore">Возможно хранилище ключей заблокировано. Для разблокировки смените на смартфоне тип блокировки экрана и восстановите вами ранее установленный.</string>
     <string name="goto_lock_screen_setting">Настойки блокировки</string>
     <string name="enable_location">Включите определение местоположения в настройках телефона</string>
-    <string name="network_disconnected">Сеть недоступна</string>
     <string name="db_backuped">Данные сархивированы</string>
     <string name="db_restored">Данные восстановлены</string>
+    <string name="created">Создано</string>
+    <string name="modified">Изменено</string>
 
 </resources>

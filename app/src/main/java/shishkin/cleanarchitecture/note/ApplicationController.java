@@ -30,5 +30,10 @@ public class ApplicationController extends ApplicationModule {
                 File.separator + BuildConfig.APPLICATION_ID + File.separator;
     }
 
+    @Override
+    public boolean isKillOnFinish() {
+        return true;
+    }
+
 
 }

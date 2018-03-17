@@ -8,6 +8,9 @@ import android.arch.persistence.room.Transaction;
 import android.arch.persistence.room.Update;
 
 
+import java.util.List;
+
+
 import shishkin.cleanarchitecture.note.data.Note;
 
 import static android.arch.persistence.room.OnConflictStrategy.ROLLBACK;
@@ -15,19 +18,19 @@ import static android.arch.persistence.room.OnConflictStrategy.ROLLBACK;
 @Dao
 public interface NoteDao {
 
-    @Transaction
-    @Insert(onConflict = ROLLBACK)
+    @Insert
     void insert(Note note);
 
-    @Transaction
-    @Update(onConflict = ROLLBACK)
+    @Update
     void update(Note note);
 
-    @Transaction
     @Delete
     void delete(Note note);
 
-    @Transaction
     @Query("DELETE FROM " + Note.TABLE)
     void delete();
+
+    @Query("SELECT * FROM " + Note.TABLE + " ORDER BY " + Note.Columns.created + " ASC")
+    List<Note> get();
+
 }
