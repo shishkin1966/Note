@@ -55,8 +55,7 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
 
     @Override
     public void onStart() {
-        SLUtil.getActivityUnion().showProgressBar();
-
+        getModel().getView().showProgressBar();
         getModel().getInteractor().getNotes(NAME);
     }
 
@@ -68,7 +67,7 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
 
     @Override
     public void response(Result result) {
-        SLUtil.getActivityUnion().hideProgressBar();
+        getModel().getView().hideProgressBar();
         if (result.hasError()) {
             SLUtil.getActivityUnion().showErrorMessage(new ShowErrorMessageEvent(result));
         } else {
