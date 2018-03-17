@@ -1,0 +1,68 @@
+apply plugin: 'com.android.library'
+
+def supportLibVersion = "26.0.2"
+def compileSdk = 26
+def buildTools = "26.0.2"
+def minSdk = 15
+def targetSdk = 26
+def playServices = "11.2.0"
+
+android {
+    compileSdkVersion compileSdk
+    buildToolsVersion buildTools
+
+    configurations.all {
+        resolutionStrategy.force "com.android.support:support-annotations:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-compat:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-core-ui:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-core-utils:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-fragment:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-vector-drawable:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:animated-vector-drawable:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-v4:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-v7:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:design:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:support-v13:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:animated-vector-drawable:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:appcompat-v7:$supportLibVersion"
+        resolutionStrategy.force "com.android.support:recyclerview-v7:$supportLibVersion"
+    }
+
+    defaultConfig {
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // логирование приложениия
+    compile 'com.github.snowdream.android.util:log:1.2.0'
+
+    // Легковесный Stream API
+    compile 'com.annimon:stream:1.1.9'
+    compile "com.google.android.gms:play-services-base:$playServices"
+    compile "com.google.android.gms:play-services-maps:$playServices"
+    compile "com.google.android.gms:play-services-location:$playServices"
+    compile 'com.google.maps.android:android-maps-utils:0.5'
+    compile "com.android.support:design:$supportLibVersion"
+
+    // Toastы
+    compile 'com.github.GrenderG:Toasty:1.2.8'
+
+}

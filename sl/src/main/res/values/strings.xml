@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="error_sufix">\nЕсли Вам не понятна ошибка свяжитесь с разработчиками программы</string>
+    <string name="ok_upper">OK</string>
+    <string name="loading">Подождите</string>
+    <string name="double_back_pressed">Для выхода нажмите ещё раз</string>
+    <string name="exit">Выход</string>
+    <string name="warning">Внимание</string>
+    <string name="setting">Настройки</string>
+    <string name="cancel">Отмена</string>
+    <string name="error_lock_keystore">Возможно хранилище ключей заблокировано. Для разблокировки смените на смартфоне тип блокировки экрана и восстановите вами ранее установленный.</string>
+    <string name="goto_lock_screen_setting">Настойки блокировки</string>
+    <string name="enable_location">Включите определение местоположения в настройках телефона</string>
+    <string name="network_disconnected">Сеть недоступна</string>
+    <string name="db_backuped">Данные сархивированы</string>
+    <string name="db_restored">Данные восстановлены</string>
+
+</resources>

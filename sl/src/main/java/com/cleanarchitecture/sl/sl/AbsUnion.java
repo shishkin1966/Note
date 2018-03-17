@@ -1,0 +1,83 @@
+package com.cleanarchitecture.sl.sl;
+
+
+import java.lang.ref.WeakReference;
+import java.util.List;
+
+/**
+ * Абстрактное объединение
+ */
+public abstract class AbsUnion<T extends ModuleSubscriber> extends AbsSmallUnion<T> implements Union<T> {
+
+    private WeakReference<T> mCurrentSubscriber;
+
+    @Override
+    public synchronized void register(final T subscriber) {
+        if (subscriber == null) return;
+
+        super.register(subscriber);
+
+        if (subscriber != null && mCurrentSubscriber != null && mCurrentSubscriber.get() != null) {
+            if (subscriber.getName().equalsIgnoreCase(mCurrentSubscriber.get().getName())) {
+                mCurrentSubscriber = new WeakReference<>(subscriber);
+            }
+        }
+    }
+
+
+    @Override
+    public synchronized void unregister(final T subscriber) {
+        if (subscriber == null) return;
+
+        //if (!ApplicationModule.getInstance().isFinished()) {
+        //    if (IActivity.class.isInstance(subscriber)) return;
+        //}
+
+        super.unregister(subscriber);
+
+        if (subscriber != null && mCurrentSubscriber != null && mCurrentSubscriber.get() != null) {
+            if (subscriber.getName().equalsIgnoreCase(mCurrentSubscriber.get().getName())) {
+                if (mCurrentSubscriber.get().equals(subscriber)) {
+                    mCurrentSubscriber.clear();
+                    mCurrentSubscriber = null;
+                }
+            }
+        }
+    }
+
+    @Override
+    public synchronized void setCurrentSubscriber(final T subscriber) {
+        if (subscriber != null) {
+            mCurrentSubscriber = new WeakReference<>(subscriber);
+        }
+    }
+
+    @Override
+    public synchronized T getCurrentSubscriber() {
+        if (mCurrentSubscriber != null && mCurrentSubscriber.get() != null) {
+            return mCurrentSubscriber.get();
+        }
+        return getAnySubscriber();
+    }
+
+    private synchronized T getAnySubscriber() {
+        final List<WeakReference<T>> list = getSubscribers();
+        if (!list.isEmpty()) {
+            if (list.size() == 1) {
+                return list.get(0).get();
+            }
+
+            for (WeakReference<T> ref : list) {
+                if (ref.get() != null && ref.get().validate()) {
+                    return ref.get();
+                }
+            }
+
+            return list.get(0).get();
+        } else {
+            ErrorModule.getInstance().onError(getName(), "Subscribers not found", false);
+        }
+        return null;
+    }
+
+}

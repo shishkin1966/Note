@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RippleTextView">
+        <attr name="rippleColor" format="color"/>
+        <attr name="rippleRectColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="AutoLoadImageView">
+        <attr name="url" format="string"/>
+        <attr name="placeHolder" format="integer"/>
+        <attr name="errorHolder" format="integer"/>
+    </declare-styleable>
+
+</resources>

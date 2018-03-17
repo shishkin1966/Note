@@ -1,0 +1,117 @@
+<resources>
+
+    <style name="Translucent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
+    <style name="VerticalDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/divider_color</item>
+    </style>
+
+    <style name="HorizontalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/divider_color</item>
+    </style>
+
+    <style name="HorizontalDividerBlue2dp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+
+    <style name="BaseTextStyle" parent="@android:style/Widget.TextView" />
+
+    <style name="PopupMenu" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:listPreferredItemHeightSmall">@dimen/menu_item_height</item>
+        <item name="android:divider">@color/divider_color</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:textColor">@color/popup_menu_item_selector</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:itemBackground">@drawable/popup_menu_selector</item>
+    </style>
+
+    <style name="ToolbarWhiteBackArrow" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/edittext_background</item>
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+        <item name="android:textColorHint">@color/gray_switch</item>
+    </style>
+
+    <style name="HelveticaTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/gray_text</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="SwitchCompat">
+        <item name="thumbTint">@color/switch_thumb_selector</item>
+        <item name="trackTint">@color/switch_track_selector</item>
+    </style>
+
+    <style name="ButtonStyle" parent="HelveticaTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">false</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:clickable">true</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="FlatOrangeButtonStyle" parent="ButtonStyle">
+        <item name="android:textColor">@color/white_text_selector</item>
+        <item name="android:background">@drawable/orange_text_button_background</item>
+    </style>
+
+    <style name="FlatRedButtonStyle" parent="ButtonStyle">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@color/white_text_selector</item>
+        <item name="android:background">@drawable/red_text_button_background</item>
+    </style>
+
+    <style name="FlatTransparentButtonStyle" parent="ButtonStyle">
+        <item name="android:textColor">@color/primary_text_selector</item>
+    </style>
+
+    <style name="FlatTransparentOrangeButtonStyle" parent="ButtonStyle">
+        <item name="android:textColor">@color/orange_text_selector</item>
+        <item name="android:background">@drawable/orange_pressed_text_button_background</item>
+    </style>
+
+    <style name="FlatTransparentButtonWithBorderStyle" parent="FlatTransparentButtonStyle">
+        <item name="android:background">@drawable/transparent_text_button_with_border_background</item>
+    </style>
+
+    <style name="FlatWhiteTransparentButtonWithBorderStyle" parent="FlatTransparentButtonStyle">
+        <item name="android:background">@drawable/transparent_white_text_button_with_border_background</item>
+        <item name="android:textColor">@color/white_text_selector</item>
+    </style>
+
+    <style name="ButtonWithBorderStyle" parent="FlatTransparentButtonStyle">
+        <item name="android:background">@drawable/text_button_background</item>
+    </style>
+
+
+
+</resources>

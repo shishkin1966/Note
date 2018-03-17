@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="dialog_request_permissions" type="id" />
+    <item name="dialog_get_desktop" type="id" />
+    <item name="dialog_show_lock_screen_setting" type="id" />
+    <item name="dialog_enable_location" type="id" />
+
+    <item name="modalBar" type="id" />
+    <item name="swipeRefreshLayout" type="id" />
+
+</resources>
