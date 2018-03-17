@@ -255,5 +255,18 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
         }
     }
 
+    @Override
+    public void setHint(final String hint) {
+        if (validate()) {
+            if (mEdit != null) {
+                mEdit.setHint(hint);
+            }
+        }
+    }
+
+    @Override
+    public EditText getEdit() {
+        return mEdit;
+    }
 
 }

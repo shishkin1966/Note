@@ -12,11 +12,11 @@ public class NotesModel extends AbsModel {
         super(fragment);
 
         setRouter(new NotesRouter(this));
-
+        setPresenter(new NotesPresenter(this));
     }
 
     @Override
-    public NotesView getView() {
+    public NotesFragment getView() {
         return super.getView();
     }
 
@@ -24,5 +24,4 @@ public class NotesModel extends AbsModel {
     public NotesRouter getRouter() {
         return super.getRouter();
     }
-
 }

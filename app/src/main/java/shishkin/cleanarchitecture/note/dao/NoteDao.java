@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Transaction;
+import android.arch.persistence.room.Update;
 
 
 import shishkin.cleanarchitecture.note.data.Note;
@@ -17,6 +18,10 @@ public interface NoteDao {
     @Transaction
     @Insert(onConflict = ROLLBACK)
     void insert(Note note);
+
+    @Transaction
+    @Update(onConflict = ROLLBACK)
+    void update(Note note);
 
     @Transaction
     @Delete

@@ -15,6 +15,7 @@ import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
 import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
+import com.github.clans.fab.FloatingActionButton;
 
 
 import shishkin.cleanarchitecture.note.R;
@@ -23,10 +24,11 @@ import shishkin.cleanarchitecture.note.R;
  * Created by Shishkin on 17.03.2018.
  */
 
-public class NotesFragment extends AbsToolbarFragment<NotesModel> implements RecyclerViewSwipeListener {
+public class NotesFragment extends AbsToolbarFragment<NotesModel> implements RecyclerViewSwipeListener, NotesView {
 
     private OnBackPressedPresenter mOnBackPressedPresenter = new OnBackPressedPresenter();
     private RecyclerView mRecyclerView;
+    private FloatingActionButton mButton;
 
     public static NotesFragment newInstance() {
         return new NotesFragment();
@@ -42,6 +44,9 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         super.onViewCreated(view, savedInstanceState);
 
         setModel(new NotesModel(this));
+
+        mButton = findView(R.id.add);
+        mButton.setOnClickListener(getModel().getPresenter());
 
         addStateObserver(mOnBackPressedPresenter);
 
@@ -106,7 +111,7 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_setting:
-                getModel().getRouter().showSetting();
+                //getModel().getRouter().showSetting();
                 break;
 
             case R.id.menu_backup_dp:
@@ -129,5 +134,10 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         //final Summary item = mAdapter.getItem(viewHolder.getAdapterPosition());
         //mDeleteSummary = viewHolder.getAdapterPosition();
         //SLUtil.getActivityUnion().showDialog(new ShowDialogEvent(R.id.dialog_delete_day, this.getName(), null, "Удалить данные за " + item.getDay() + "?", R.string.yes, R.string.no));
+    }
+
+    @Override
+    public void refreshData() {
+
     }
 }

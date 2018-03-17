@@ -1,6 +1,7 @@
 package com.cleanarchitecture.sl.ui.fragment;
 
 import android.view.MenuItem;
+import android.widget.EditText;
 
 /**
  * Created by Shishkin on 06.01.2018.
@@ -66,4 +67,17 @@ public interface ToolbarFragment {
      */
     void setEdit(final String text, final boolean isVisible);
 
+    /**
+     * Установить hint EditText
+     *
+     * @param hint    текст
+     */
+    void setHint(final String hint);
+
+    /**
+     * Получить EditText заголовка
+     *
+     */
+    EditText getEdit();
 }
+

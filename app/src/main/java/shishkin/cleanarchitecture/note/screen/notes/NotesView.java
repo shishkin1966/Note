@@ -8,4 +8,6 @@ import com.cleanarchitecture.sl.ui.fragment.IFragment;
 
 public interface NotesView extends IFragment {
 
+    void refreshData();
+
 }

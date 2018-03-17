@@ -6,15 +6,18 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
 import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
+import com.github.clans.fab.FloatingActionButton;
 import com.google.gson.Gson;
 
 
@@ -27,12 +30,17 @@ import shishkin.cleanarchitecture.note.screen.notes.NotesModel;
  * Created by Shishkin on 17.03.2018.
  */
 
-public class NoteFragment extends AbsToolbarFragment<NoteModel> {
+public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.OnFocusChangeListener{
+
+    public static final String OPERATION_INSERT = "OPERATION_INSERT";
+    public static final String OPERATION_EDIT = "OPERATION_EDIT";
 
     private OnBackPressedPresenter mOnBackPressedPresenter = new OnBackPressedPresenter();
     private RecyclerView mRecyclerView;
     private NoteJson mNoteJson;
     private Note mNote;
+    private String mOperation = OPERATION_EDIT;
+    private EditText mCurrent;
 
     public static NoteFragment newInstance(final Note note) {
         final NoteFragment f = new NoteFragment();
@@ -55,6 +63,10 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> {
 
         mNote = getArguments().getParcelable("note");
         mNoteJson = new Gson().fromJson(mNote.getNote(), NoteJson.class);
+        if (mNoteJson == null) {
+            mOperation = OPERATION_INSERT;
+            mNoteJson = new NoteJson();
+        }
 
         addStateObserver(mOnBackPressedPresenter);
 
@@ -95,7 +107,24 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> {
 
     @Override
     public void prepareToolbar() {
+        setHint(getString(R.string.note_title));
         setEdit(mNoteJson.getTitle(), true);
+        getEdit().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        getEdit().setOnFocusChangeListener(this);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        mNoteJson.setTitle(getEdit().getText().toString());
+        mNote.setNote(new Gson().toJson(mNoteJson));
+        getModel().getPresenter().onBackPressed(mNote, mOperation);
+        return false;
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus) {
+            mCurrent = (EditText)v;
+        }
+    }
 }
