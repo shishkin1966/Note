@@ -86,12 +86,6 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
     public void onResume() {
         super.onResume();
 
-        if (Connectivity.isNetworkConnected(getContext())) {
-            setToolbarColor(getPrimaryColor());
-        } else {
-            setToolbarColor(getAccentColor());
-        }
-
         prepareToolbar();
     }
 

@@ -20,7 +20,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IExecutor {
-    private ReentrantLock mLock;
     private Map<String, WeakReference<Request>> mRequests = Collections.synchronizedMap(new ConcurrentHashMap<String, WeakReference<Request>>());
 
     /**
@@ -33,35 +32,27 @@ public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IEx
      */
     public RequestThreadPoolExecutor(final int corePoolSize, final int maximumPoolSize, final long keepAliveTime, final TimeUnit unit, final BlockingQueue<Runnable> workQueue) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, new JobThreadFactory());
-
-        mLock = new ReentrantLock();
     }
 
-    public void addRequest(Request request) {
+    public synchronized void addRequest(Request request) {
         if (request == null) return;
 
-        mLock.lock();
-        try {
-            checkNullRequest();
+        checkNullRequest();
 
-            if (request.isDistinct()) {
-                if (mRequests.containsKey(request.getName())) {
-                    final Request oldRequest = mRequests.get(request.getName()).get();
-                    if (oldRequest != null) {
-                        oldRequest.setCanceled();
-                    }
+        if (request.isDistinct()) {
+            if (mRequests.containsKey(request.getName())) {
+                final Request oldRequest = mRequests.get(request.getName()).get();
+                if (oldRequest != null) {
+                    oldRequest.setCanceled();
                 }
             }
-
-            mRequests.put(request.getName(), new WeakReference<>(request));
-        } finally {
-            mLock.unlock();
         }
+        mRequests.put(request.getName(), new WeakReference<>(request));
 
         execute(request);
     }
 
-    public void clear() {
+    public synchronized void clear() {
         mRequests.clear();
     }
 
@@ -94,7 +85,7 @@ public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IEx
     }
 
     @Override
-    public void processing(Object sender, Object object) {
+    public synchronized void processing(Object sender, Object object) {
         addRequest((Request) object);
     }
 

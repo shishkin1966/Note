@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
 import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
-import com.cleanarchitecture.common.utils.SafeUtils;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
 import com.github.clans.fab.FloatingActionButton;
@@ -130,9 +129,6 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         getModel().getInteractor().removeNote(mAdapter.getItem(position));
         mAdapter.remove(position);
         mAdapter.notifyItemRangeRemoved(position, 1);
-        //final Summary item = mAdapter.getItem(viewHolder.getAdapterPosition());
-        //mDeleteSummary = viewHolder.getAdapterPosition();
-        //SLUtil.getActivityUnion().showDialog(new ShowDialogEvent(R.id.dialog_delete_day, this.getName(), null, "Удалить данные за " + item.getDay() + "?", R.string.yes, R.string.no));
     }
 
 
