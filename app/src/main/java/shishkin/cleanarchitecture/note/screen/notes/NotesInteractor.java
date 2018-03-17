@@ -18,6 +18,5 @@ public class NotesInteractor implements ModelInteractor {
 
     public void removeNote(Note note) {
         Repository.removeNote(note);
-
     }
 }
