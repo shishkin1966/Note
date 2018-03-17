@@ -2,13 +2,18 @@ package shishkin.cleanarchitecture.note.screen.notes;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
+import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
-import com.cleanarchitecture.sl.sl.ApplicationModule;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
 
 
@@ -18,9 +23,10 @@ import shishkin.cleanarchitecture.note.R;
  * Created by Shishkin on 17.03.2018.
  */
 
-public class NotesFragment extends AbsToolbarFragment<NotesModel> {
+public class NotesFragment extends AbsToolbarFragment<NotesModel> implements RecyclerViewSwipeListener {
 
     private OnBackPressedPresenter mOnBackPressedPresenter = new OnBackPressedPresenter();
+    private RecyclerView mRecyclerView;
 
     public static NotesFragment newInstance() {
         return new NotesFragment();
@@ -38,7 +44,41 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> {
         setModel(new NotesModel(this));
 
         addStateObserver(mOnBackPressedPresenter);
+
+        mRecyclerView = findView(R.id.list);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        /*
+        mAdapter = new PedometerRecyclerViewAdapter(getContext());
+        mAdapter.setOnItemClickListener((v, position, item) -> {
+            if (position != mAdapter.getItemCount() - 1) {
+                final PedometerPresenter pedometerPresenter = SafeUtils.cast(SLUtil.getPresenterUnion().getSubscriber(PedometerPresenter.NAME));
+                if (pedometerPresenter != null) {
+                    pedometerPresenter.setPage(0);
+                }
+                final PedometerMapPresenter pedometerMapPresenter = SafeUtils.cast(SLUtil.getPresenterUnion().getSubscriber(PedometerMapPresenter.NAME));
+                if (pedometerMapPresenter != null) {
+                    pedometerMapPresenter.setDay(item.getDay());
+                }
+            }
+        });
+        mRecyclerView.setAdapter(mAdapter);
+        */
+
+        final ItemTouchHelper.Callback callback = new SwipeTouchHelper(null, this);
+        final ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(mRecyclerView);
+
     }
+
+    @Override
+    public void onDestroyView() {
+        mRecyclerView.setAdapter(null);
+
+        super.onDestroyView();
+    }
+
 
     @Override
     public String getName() {
@@ -84,4 +124,10 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> {
         return true;
     }
 
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+        //final Summary item = mAdapter.getItem(viewHolder.getAdapterPosition());
+        //mDeleteSummary = viewHolder.getAdapterPosition();
+        //SLUtil.getActivityUnion().showDialog(new ShowDialogEvent(R.id.dialog_delete_day, this.getName(), null, "Удалить данные за " + item.getDay() + "?", R.string.yes, R.string.no));
+    }
 }
