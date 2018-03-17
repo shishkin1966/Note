@@ -55,8 +55,7 @@ public class ErrorModule implements IErrorModule {
                 file.mkdirs();
             }
             if (file.exists()) {
-                Log.setFilePathGenerator(new FilePathGenerator.DefaultFilePathGenerator(path,
-                        StringUtils.replace(BuildConfig.APPLICATION_ID, ".", "_"), ".log"));
+                Log.setFilePathGenerator(new FilePathGenerator.DefaultFilePathGenerator(path,"log", ".txt"));
                 checkLogSize();
             } else {
                 Log.setEnabled(false);
