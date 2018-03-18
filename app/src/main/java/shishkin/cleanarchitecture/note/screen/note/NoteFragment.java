@@ -43,6 +43,7 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
     private EditText mCurrent;
     private NoteRecyclerViewAdapter mAdapter;
     private View mAddButton;
+    private EditText mTitle;
 
     public static NoteFragment newInstance(final Note note) {
         final NoteFragment f = new NoteFragment();
@@ -80,6 +81,9 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
         mAdapter.setItems(mNoteJson.getItems());
         mRecyclerView.setAdapter(mAdapter);
 
+        mTitle = findView(R.id.title);
+        mTitle.setText(mNoteJson.getTitle());
+
         mAddButton = findView(R.id.add);
         mAddButton.setOnClickListener(this);
     }
@@ -99,15 +103,16 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
 
     @Override
     public void prepareToolbar() {
-        setHint(getString(R.string.note_title));
-        setEdit(mNoteJson.getTitle(), true);
-        getEdit().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-        getEdit().setOnFocusChangeListener(this);
+        if (mOperation.equals(NoteFragment.OPERATION_INSERT)) {
+            setTitle(getString(R.string.note_new));
+        } else {
+            setTitle(getString(R.string.note_edit));
+        }
     }
 
     @Override
     public boolean onBackPressed() {
-        mNoteJson.setTitle(getEdit().getText().toString());
+        mNoteJson.setTitle(mTitle.getText().toString());
         getModel().getPresenter().onBackPressed(mNote, mNoteJson, mOperation);
         return false;
     }

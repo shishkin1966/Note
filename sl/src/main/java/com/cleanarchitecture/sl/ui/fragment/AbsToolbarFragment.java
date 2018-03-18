@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,8 +43,6 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
     private Toolbar mToolbar;
     private ImageView mMenu;
     private ImageView mItem;
-    private EditText mEdit;
-    private TextView mTitle;
     private int mMenuId = 0;
     private PopupMenu mPopupMenu;
     private boolean mPopupMenuShow = false;
@@ -67,10 +64,6 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
         if (mItem != null) {
             mItem.setOnClickListener(this);
         }
-
-        mEdit = findView(R.id.toolbar_edit);
-
-        mTitle = findView(R.id.toolbar_title);
 
         final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
@@ -94,13 +87,9 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
     @Override
     public void setTitle(String title) {
         if (validate()) {
-            if (mTitle != null) {
-                mTitle.setText(title);
-                mTitle.setVisibility(View.VISIBLE);
-            }
-
-            if (mEdit != null) {
-                mEdit.setVisibility(View.INVISIBLE);
+            final TextView view = mToolbar.findViewById(R.id.toolbar_title);
+            if (view != null) {
+                view.setText(title);
             }
         }
     }
@@ -220,34 +209,6 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
             }
             mItem.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
-    }
-
-    @Override
-    public void setEdit(final String text, final boolean isVisible) {
-        if (validate()) {
-            if (mEdit != null) {
-                mEdit.setText(text);
-                mEdit.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
-            }
-
-            if (!isVisible && mTitle != null) {
-                mTitle.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-    @Override
-    public void setHint(final String hint) {
-        if (validate()) {
-            if (mEdit != null) {
-                mEdit.setHint(hint);
-            }
-        }
-    }
-
-    @Override
-    public EditText getEdit() {
-        return mEdit;
     }
 
 }

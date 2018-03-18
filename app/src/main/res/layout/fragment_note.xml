@@ -17,12 +17,12 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="@dimen/width_toolbar"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="@color/white"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout2">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/add"
@@ -35,25 +35,51 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="@dimen/width_toolbar"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/linearLayout2"
             android:layout_toRightOf="@+id/linearLayout2"
-            android:background="@color/white"
-            android:scrollbars="vertical"/>
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_light"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/title"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/dimen_4dp"
+                    android:layout_marginRight="@dimen/dimen_8dp"
+                    android:layout_marginLeft="@dimen/dimen_8dp"
+                    android:layout_marginTop="@dimen/dimen_4dp"/>
+            </LinearLayout>
+
+            <View
+                style="@style/HorizontalDividerBlue2dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:scrollbars="vertical"/>
+        </LinearLayout>
 
         <View
+            android:id="@+id/view"
             android:layout_width="8dp"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/linearLayout2"
             android:layout_toRightOf="@+id/linearLayout2"
-            android:background="@drawable/left_shadow"
-            android:id="@+id/view"/>
+            android:background="@drawable/left_shadow"/>
     </RelativeLayout>
 
 
