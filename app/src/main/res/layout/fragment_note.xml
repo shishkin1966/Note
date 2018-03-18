@@ -9,7 +9,7 @@
 
     <include layout="@layout/toolbar"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
@@ -19,8 +19,10 @@
         <LinearLayout
             android:layout_width="@dimen/width_toolbar"
             android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/linearLayout2">
 
             <ImageView
                 android:id="@+id/add"
@@ -33,17 +35,26 @@
 
         </LinearLayout>
 
-        <View
-            style="@style/VerticalDivider"/>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/linearLayout2"
+            android:layout_toRightOf="@+id/linearLayout2"
             android:background="@color/white"
             android:scrollbars="vertical"/>
 
-    </LinearLayout>
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/linearLayout2"
+            android:layout_toRightOf="@+id/linearLayout2"
+            android:background="@drawable/left_shadow"
+            android:id="@+id/view"/>
+    </RelativeLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

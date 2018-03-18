@@ -14,4 +14,16 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <style name="ItemEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">5</item>
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textColorHint">@color/gray_switch</item>
+    </style>
+
+
 </resources>
