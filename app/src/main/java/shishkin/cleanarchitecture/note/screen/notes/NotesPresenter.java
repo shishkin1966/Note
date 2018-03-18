@@ -55,7 +55,6 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
         getModel().getInteractor().getNotes(NAME);
     }
 
-
     @Override
     public void response(Result result) {
         getModel().getView().hideProgressBar();

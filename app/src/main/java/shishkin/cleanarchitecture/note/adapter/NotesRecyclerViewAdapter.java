@@ -75,7 +75,7 @@ public class NotesRecyclerViewAdapter extends AbstractRecyclerViewAdapter<Note, 
                 if (items != null && !items.isEmpty()) {
                     final StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < items.size(); i++) {
-                        sb.append("" + (i+1) + ". " + items.get(i).getTitle());
+                        sb.append("" + (i + 1) + ". " + items.get(i).getTitle());
                     }
                     text.setText(sb.toString());
                 }

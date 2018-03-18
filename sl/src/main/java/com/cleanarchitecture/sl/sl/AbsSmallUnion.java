@@ -5,8 +5,8 @@ import com.cleanarchitecture.sl.data.Result;
 
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,7 +20,7 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
 
     private Map<String, WeakReference<T>> mSubscribers = Collections.synchronizedMap(new ConcurrentHashMap<String, WeakReference<T>>());
 
-    private synchronized void checkNullSubscriber() {
+    private void checkNullSubscriber() {
         for (Map.Entry<String, WeakReference<T>> entry : mSubscribers.entrySet()) {
             if (entry.getValue() == null || entry.getValue().get() == null) {
                 mSubscribers.remove(entry.getKey());
@@ -75,25 +75,24 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
     }
 
     @Override
-    public synchronized void onRegisterFirstSubscriber() {
+    public void onRegisterFirstSubscriber() {
     }
 
     @Override
-    public synchronized void onUnRegisterLastSubscriber() {
+    public void onUnRegisterLastSubscriber() {
     }
 
     @Override
-    public List<WeakReference<T>> getSubscribers() {
+    public synchronized List<WeakReference<T>> getSubscribers() {
         checkNullSubscriber();
 
-        final List<WeakReference<T>> list = new LinkedList<>();
-
+        final List<WeakReference<T>> list = new ArrayList<>();
         list.addAll(mSubscribers.values());
         return list;
     }
 
     @Override
-    public T getSubscriber(final String name) {
+    public synchronized T getSubscriber(final String name) {
         checkNullSubscriber();
 
         if (StringUtils.isNullOrEmpty(name)) return null;

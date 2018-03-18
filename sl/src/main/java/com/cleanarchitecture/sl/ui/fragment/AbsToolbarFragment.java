@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cleanarchitecture.common.net.Connectivity;
 import com.cleanarchitecture.sl.R;
 import com.cleanarchitecture.sl.model.AbsModel;
 import com.cleanarchitecture.sl.sl.ErrorModule;

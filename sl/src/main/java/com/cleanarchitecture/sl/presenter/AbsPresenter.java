@@ -28,12 +28,12 @@ public abstract class AbsPresenter<M> implements Presenter<M>, MailSubscriber {
     }
 
     @Override
-    public synchronized int getState() {
+    public int getState() {
         return mLifecycle.getState();
     }
 
     @Override
-    public synchronized void setState(final int state) {
+    public void setState(final int state) {
         mLifecycle.setState(state);
     }
 
@@ -74,12 +74,12 @@ public abstract class AbsPresenter<M> implements Presenter<M>, MailSubscriber {
     }
 
     @Override
-    public synchronized void setModel(final M model) {
+    public void setModel(final M model) {
         mModel = model;
     }
 
     @Override
-    public synchronized M getModel() {
+    public M getModel() {
         return mModel;
     }
 
