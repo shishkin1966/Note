@@ -16,8 +16,14 @@ import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
 import com.google.gson.Gson;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 import shishkin.cleanarchitecture.note.R;
+import shishkin.cleanarchitecture.note.adapter.NoteRecyclerViewAdapter;
 import shishkin.cleanarchitecture.note.data.Note;
+import shishkin.cleanarchitecture.note.data.NoteItem;
 import shishkin.cleanarchitecture.note.data.NoteJson;
 
 /**
@@ -35,6 +41,8 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
     private Note mNote;
     private String mOperation = OPERATION_EDIT;
     private EditText mCurrent;
+    private NoteRecyclerViewAdapter mAdapter;
+    private View mAddButton;
 
     public static NoteFragment newInstance(final Note note) {
         final NoteFragment f = new NoteFragment();
@@ -68,22 +76,12 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        /*
-        mAdapter = new PedometerRecyclerViewAdapter(getContext());
-        mAdapter.setOnItemClickListener((v, position, item) -> {
-            if (position != mAdapter.getItemCount() - 1) {
-                final PedometerPresenter pedometerPresenter = SafeUtils.cast(SLUtil.getPresenterUnion().getSubscriber(PedometerPresenter.NAME));
-                if (pedometerPresenter != null) {
-                    pedometerPresenter.setPage(0);
-                }
-                final PedometerMapPresenter pedometerMapPresenter = SafeUtils.cast(SLUtil.getPresenterUnion().getSubscriber(PedometerMapPresenter.NAME));
-                if (pedometerMapPresenter != null) {
-                    pedometerMapPresenter.setDay(item.getDay());
-                }
-            }
-        });
+        mAdapter = new NoteRecyclerViewAdapter(getContext());
+        mAdapter.setItems(mNoteJson.getItems());
         mRecyclerView.setAdapter(mAdapter);
-        */
+
+        mAddButton = findView(R.id.add);
+        mAddButton.setOnClickListener(this);
     }
 
     @Override
@@ -118,6 +116,19 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
     public void onFocusChange(View v, boolean hasFocus) {
         if (hasFocus) {
             mCurrent = (EditText) v;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add:
+                mAdapter.add(new NoteItem());
+                break;
+
+            default:
+                super.onClick(v);
+                break;
         }
     }
 }
