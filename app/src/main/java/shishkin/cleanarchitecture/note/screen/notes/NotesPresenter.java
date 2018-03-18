@@ -10,19 +10,15 @@ import com.cleanarchitecture.sl.request.ResponseListener;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 
-import java.util.List;
-
-
 import shishkin.cleanarchitecture.note.R;
 import shishkin.cleanarchitecture.note.data.Note;
-import shishkin.cleanarchitecture.note.mail.OnDataChangeListener;
 import shishkin.cleanarchitecture.note.request.GetNotesRequest;
 
 /**
  * Created by Shishkin on 17.03.2018.
  */
 
-public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnClickListener, OnDataChangeListener, ResponseListener {
+public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnClickListener, ResponseListener {
 
     public static final String NAME = NotesPresenter.class.getName();
 
@@ -59,11 +55,6 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
         getModel().getInteractor().getNotes(NAME);
     }
 
-
-    @Override
-    public void onChange(String table) {
-        onStart();
-    }
 
     @Override
     public void response(Result result) {

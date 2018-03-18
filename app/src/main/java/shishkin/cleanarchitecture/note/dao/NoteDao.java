@@ -18,10 +18,12 @@ import static android.arch.persistence.room.OnConflictStrategy.ROLLBACK;
 @Dao
 public interface NoteDao {
 
-    @Insert
+    @Transaction
+    @Insert(onConflict = ROLLBACK)
     void insert(Note note);
 
-    @Update
+    @Transaction
+    @Update(onConflict = ROLLBACK)
     void update(Note note);
 
     @Delete

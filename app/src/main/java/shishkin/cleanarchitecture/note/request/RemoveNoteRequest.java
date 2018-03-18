@@ -7,7 +7,6 @@ import com.cleanarchitecture.sl.sl.SLUtil;
 
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.db.NotesDb;
-import shishkin.cleanarchitecture.note.mail.OnChangeNoteMail;
 
 /**
  * Created by Shishkin on 17.03.2018.
@@ -38,8 +37,6 @@ public class RemoveNoteRequest extends AbsRequest {
         try {
             final NotesDb db = SLUtil.getDb();
             db.NoteDao().delete(mNote);
-
-            SLUtil.addMail(new OnChangeNoteMail());
         } catch (Exception e) {
             ErrorModule.getInstance().onError(getName(), e);
         }
