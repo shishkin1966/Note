@@ -48,36 +48,53 @@ public class NotesRecyclerViewAdapter extends AbstractRecyclerViewAdapter<Note, 
 
     static class ViewHolder extends AbstractViewHolder {
 
-        private TextView title;
-        private TextView text;
-        private TextView created;
-        private TextView modified;
+        private TextView titleView;
+        private TextView textView;
+        private TextView createdView;
+        private TextView modifiedView;
+        private View createdLL;
+        private View modifiedLL;
 
         ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-            title = findView(R.id.title);
-            text = findView(R.id.note);
-            created = findView(R.id.created);
-            modified = findView(R.id.modified);
+            titleView = findView(R.id.title);
+            textView = findView(R.id.note);
+            createdView = findView(R.id.created);
+            modifiedView = findView(R.id.modified);
+            createdLL = findView(R.id.ll_created);
+            modifiedLL = findView(R.id.ll_modified);
         }
 
         void bind(@NonNull final Note note) {
-            created.setText(StringUtils.formatDate(note.getCreated()));
+            createdView.setText(StringUtils.formatDate(note.getCreated()));
             if (note.getModified() != null) {
-                modified.setText(StringUtils.formatDate(note.getModified()));
+                modifiedView.setText(StringUtils.formatDate(note.getModified()));
+            }
+            if (note.getModified() == null) {
+                createdLL.setVisibility(View.VISIBLE);
+                modifiedLL.setVisibility(View.GONE);
+            } else {
+                createdLL.setVisibility(View.GONE);
+                modifiedLL.setVisibility(View.VISIBLE);
             }
 
             final NoteJson noteJson = new Gson().fromJson(note.getNote(), NoteJson.class);
             if (noteJson != null) {
-                title.setText(noteJson.getTitle());
+                final String title = noteJson.getTitle();
+                titleView.setText(title);
+                if (StringUtils.isNullOrEmpty(title)) {
+                    titleView.setVisibility(View.GONE);
+                } else {
+                    titleView.setVisibility(View.VISIBLE);
+                }
                 final List<NoteItem> items = noteJson.getItems();
                 if (items != null && !items.isEmpty()) {
                     final StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < items.size(); i++) {
                         sb.append("" + (i + 1) + ". " + items.get(i).getTitle());
                     }
-                    text.setText(sb.toString());
+                    textView.setText(sb.toString());
                 }
             }
         }

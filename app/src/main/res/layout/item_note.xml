@@ -6,32 +6,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dimen_8dp"
         android:layout_marginRight="@dimen/dimen_8dp"
+        android:minHeight="@dimen/dimen_32dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/title"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_xlarge"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_xlarge"/>
 
         <TextView
             android:id="@+id/note"
-            android:textSize="@dimen/text_size_large"
-            android:textColor="@color/gray_text"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"
+            android:textColor="@color/gray_text"
+            android:textSize="@dimen/text_size_large"/>
 
         <LinearLayout
-            android:layout_marginBottom="@dimen/dimen_4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimen_4dp"
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ll_created"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -56,6 +59,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_modified"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

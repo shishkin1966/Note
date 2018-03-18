@@ -110,8 +110,7 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
     @Override
     public boolean onBackPressed() {
         mNoteJson.setTitle(getEdit().getText().toString());
-        mNote.setNote(new Gson().toJson(mNoteJson));
-        getModel().getPresenter().onBackPressed(mNote, mOperation);
+        getModel().getPresenter().onBackPressed(mNote, mNoteJson, mOperation);
         return false;
     }
 
