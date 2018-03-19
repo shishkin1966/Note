@@ -88,13 +88,24 @@ public class NotesRecyclerViewAdapter extends AbstractRecyclerViewAdapter<Note, 
                 } else {
                     titleView.setVisibility(View.VISIBLE);
                 }
+
                 final List<NoteItem> items = noteJson.getItems();
                 if (items != null && !items.isEmpty()) {
                     final StringBuilder sb = new StringBuilder();
+                    int row = 1;
                     for (int i = 0; i < items.size(); i++) {
-                        sb.append("" + (i + 1) + ". " + items.get(i).getTitle());
+                        if (!StringUtils.isNullOrEmpty(StringUtils.allTrim(items.get(i).getTitle()))) {
+                            if (row != 1) {
+                                sb.append("\n");
+                            }
+                            sb.append("" + (row) + ". " + items.get(i).getTitle());
+                            row++;
+                        }
                     }
                     textView.setText(sb.toString());
+                    textView.setVisibility(View.VISIBLE);
+                } else {
+                    textView.setVisibility(View.GONE);
                 }
             }
         }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.cleanarchitecture.common.utils.StringUtils;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
 import com.google.gson.Gson;
@@ -112,7 +113,14 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
 
     @Override
     public boolean onBackPressed() {
-        mNoteJson.setTitle(mTitle.getText().toString());
+        mNoteJson.setTitle(StringUtils.allTrim(mTitle.getText().toString()));
+        final List<NoteItem> list = new ArrayList<>();
+        for (NoteItem item: mAdapter.getItems()) {
+            if (!StringUtils.isNullOrEmpty(StringUtils.allTrim(item.getTitle()))) {
+                list.add(item);
+            }
+        }
+        mNoteJson.setItems(list);
         getModel().getPresenter().onBackPressed(mNote, mNoteJson, mOperation);
         return false;
     }
@@ -129,6 +137,12 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
         switch (v.getId()) {
             case R.id.add:
                 mAdapter.add(new NoteItem());
+                mRecyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter.setFocusItem(mAdapter.getItemCount() - 1);
+                    }
+                });
                 break;
 
             default:

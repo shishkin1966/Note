@@ -128,7 +128,7 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         int position = viewHolder.getAdapterPosition();
         getModel().getInteractor().removeNote(mAdapter.getItem(position));
         mAdapter.remove(position);
-        mAdapter.notifyItemRangeRemoved(position, 1);
+        //mAdapter.notifyItemRangeRemoved(position, 1);
     }
 
 
