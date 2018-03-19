@@ -52,18 +52,17 @@
 
                 <EditText
                     android:id="@+id/title"
-                    style="@style/EditTextStyle"
+                    style="@style/ItemEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/dimen_4dp"
                     android:layout_marginLeft="@dimen/dimen_8dp"
                     android:layout_marginRight="@dimen/dimen_8dp"
                     android:layout_marginTop="@dimen/dimen_4dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:inputType="text|textCapSentences|textMultiLine"
                     android:textColor="@color/blue"/>
             </LinearLayout>
-
-            <View
-                style="@style/HorizontalDivider"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list"

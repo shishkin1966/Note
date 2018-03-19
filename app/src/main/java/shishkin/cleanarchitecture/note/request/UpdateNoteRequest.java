@@ -5,6 +5,7 @@ import com.cleanarchitecture.sl.sl.ErrorModule;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 
+import shishkin.cleanarchitecture.note.ApplicationController;
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.db.NotesDb;
 
@@ -40,6 +41,8 @@ public class UpdateNoteRequest extends AbsRequest {
             db.NoteDao().update(mNote);
             db.setTransactionSuccessful();
             db.endTransaction();
+
+            ((ApplicationController) ApplicationController.getInstance()).onChangeNotes();
         } catch (Exception e) {
             ErrorModule.getInstance().onError(getName(), e);
         }
