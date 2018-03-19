@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.cleanarchitecture.sl.ui.activity.AbsContentActivity;
 
 
+import shishkin.cleanarchitecture.note.ApplicationController;
 import shishkin.cleanarchitecture.note.R;
 
 public class MainActivity extends AbsContentActivity<MainModel> {
@@ -42,6 +43,8 @@ public class MainActivity extends AbsContentActivity<MainModel> {
         if (mIntent != null) {
             final String action = mIntent.getAction();
             if ("android.intent.action.MAIN".equalsIgnoreCase(action)) {
+                getModel().getRouter().showMainFragment();
+            } else if (ApplicationController.ACTION_CLICK.equalsIgnoreCase(action)) {
                 getModel().getRouter().showMainFragment();
             }
         } else {

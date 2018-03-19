@@ -17,6 +17,8 @@ import shishkin.cleanarchitecture.note.db.NotesDb;
 
 public class ApplicationController extends ApplicationModule {
 
+    public static final String ACTION_CLICK = BuildConfig.APPLICATION_ID + ".ACTION_CLICK";
+
     @Override
     public void onStart() {
         super.onStart();
@@ -28,6 +30,11 @@ public class ApplicationController extends ApplicationModule {
     public String getExternalDataPath() {
         return Environment.getExternalStorageDirectory().getAbsolutePath() +
                 File.separator + BuildConfig.APPLICATION_ID + File.separator;
+    }
+
+    @Override
+    public boolean isKillOnFinish() {
+        return true;
     }
 
 

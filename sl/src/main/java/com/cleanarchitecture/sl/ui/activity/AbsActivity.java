@@ -421,6 +421,14 @@ public abstract class AbsActivity<M extends Model> extends AppCompatActivity
         return typedValue.data;
     }
 
+    /**
+     * Called when the activity has detected the user's press of the back
+     * key. The default implementation simply finishes the current activity,
+     * but you can override this to do whatever you want.
+     */
+    public void onActivityBackPressed() {
+        super.onBackPressed();
+    }
 }
 
 

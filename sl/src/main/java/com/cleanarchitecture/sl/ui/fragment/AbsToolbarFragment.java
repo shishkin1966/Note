@@ -1,7 +1,6 @@
 package com.cleanarchitecture.sl.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.graphics.drawable.VectorDrawableCompat;
@@ -18,34 +17,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cleanarchitecture.common.net.Connectivity;
-import com.cleanarchitecture.common.utils.StringUtils;
 import com.cleanarchitecture.sl.R;
-import com.cleanarchitecture.sl.event.ui.ShowMessageEvent;
 import com.cleanarchitecture.sl.model.AbsModel;
-import com.cleanarchitecture.sl.observe.impl.NetworkBroadcastReceiverObservable;
-import com.cleanarchitecture.sl.sl.ApplicationModule;
 import com.cleanarchitecture.sl.sl.ErrorModule;
-import com.cleanarchitecture.sl.sl.ObservableSubscriber;
-import com.cleanarchitecture.sl.sl.ObservableUnion;
-import com.cleanarchitecture.sl.sl.SLUtil;
 
 
 import java.lang.reflect.Field;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-
-import static com.cleanarchitecture.common.ui.BaseSnackbar.MESSAGE_TYPE_WARNING;
 
 /**
  * Created by Shishkin on 18.11.2017.
  */
 
 public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentFragment<M>
-        implements ToolbarFragment, View.OnClickListener, ObservableSubscriber<Intent> {
+        implements ToolbarFragment, View.OnClickListener {
 
     private static final String NAME = AbsToolbarFragment.class.getName();
 
@@ -91,12 +78,6 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
     public void onResume() {
         super.onResume();
 
-        if (Connectivity.isNetworkConnected(getContext())) {
-            setToolbarColor(getPrimaryColor());
-        } else {
-            setToolbarColor(getAccentColor());
-        }
-
         prepareToolbar();
     }
 
@@ -134,15 +115,6 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
                 }
             }
         }
-    }
-
-    private void onConnect() {
-        setToolbarColor(getPrimaryColor());
-    }
-
-    private void onDisconnect() {
-        setToolbarColor(getAccentColor());
-        SLUtil.getActivityUnion().showSnackbar(new ShowMessageEvent(getString(R.string.network_disconnected), MESSAGE_TYPE_WARNING));
     }
 
     @Override
@@ -238,27 +210,5 @@ public abstract class AbsToolbarFragment<M extends AbsModel> extends AbsContentF
             mItem.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
     }
-
-    @Override
-    public List<String> getObservable() {
-        return StringUtils.arrayToList(NetworkBroadcastReceiverObservable.NAME);
-    }
-
-    @Override
-    public void onChange(Intent intent) {
-        if (validate()) {
-            if (Connectivity.isNetworkConnected(ApplicationModule.getInstance())) {
-                onConnect();
-            } else {
-                onDisconnect();
-            }
-        }
-    }
-
-    @Override
-    public List<String> getModuleSubscription() {
-        return StringUtils.arrayToList(super.getModuleSubscription(), ObservableUnion.NAME);
-    }
-
 
 }

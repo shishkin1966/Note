@@ -65,4 +65,6 @@ dependencies {
     // Toastы
     compile 'com.github.GrenderG:Toasty:1.2.8'
 
+    // FAB
+    compile 'com.github.clans:fab:1.6.4'
 }

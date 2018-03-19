@@ -3,7 +3,9 @@ package shishkin.cleanarchitecture.note.screen.notes;
 import com.cleanarchitecture.sl.model.AbsModel;
 
 
+import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.model.BaseModelRouter;
+import shishkin.cleanarchitecture.note.screen.note.NoteFragment;
 import shishkin.cleanarchitecture.note.sl.Repository;
 
 /**
@@ -26,6 +28,10 @@ public class NotesRouter extends BaseModelRouter {
 
     public void restoreDb() {
         Repository.restoreDb();
+    }
+
+    public void showNote(Note note) {
+        showFragment(NoteFragment.newInstance(note));
     }
 
 }

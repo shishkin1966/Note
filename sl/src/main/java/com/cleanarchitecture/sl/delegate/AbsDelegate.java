@@ -20,7 +20,7 @@ public abstract class AbsDelegate<T extends Delegating> implements Delegate<T> {
 
     @Override
     public void processing(Object object) {
-        if(object != null) {
+        if (object != null) {
             if (!mDelegates.containsKey(object.getClass().getName())) {
                 final T delegate = mDelegateFactory.create(object.getClass().getName());
                 mDelegates.put(object.getClass().getName(), delegate);

@@ -27,7 +27,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
 
 /**
  * Created by Shishkin on 19.12.2017.
@@ -37,6 +36,21 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
 
     public static final String NAME = DbProvider.class.getName();
     private Map<String, T> mDb = Collections.synchronizedMap(new ConcurrentHashMap<String, T>());
+    private RoomDatabase.Callback mCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+
+            onCreateDatabase(db);
+        }
+
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+
+            onOpenDatabase(db);
+        }
+    };
 
     public DbProvider() {
     }
@@ -51,43 +65,16 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
             T db;
             if (migrations == null) {
                 db = Room.databaseBuilder(context, klass, databaseName)
-                        .addCallback(new RoomDatabase.Callback() {
-                            @Override
-                            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                super.onCreate(db);
-
-                                onCreateDatabase(db);
-
-                            }
-
-                            @Override
-                            public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                                super.onOpen(db);
-
-                                onOpenDatabase(db);
-                            }
-                        })
+                        .addCallback(mCallback)
                         .build();
             } else {
-                db = Room.databaseBuilder(context, klass, databaseName).addMigrations(migrations)
-                        .addCallback(new RoomDatabase.Callback() {
-                            @Override
-                            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                super.onCreate(db);
-
-                                Executors.newSingleThreadScheduledExecutor().execute(() -> onCreateDatabase(db));
-                            }
-
-                            @Override
-                            public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                                super.onOpen(db);
-
-                                Executors.newSingleThreadScheduledExecutor().execute(() -> onOpenDatabase(db));
-                            }
-                        })
+                db = Room.databaseBuilder(context, klass, databaseName)
+                        .addMigrations(migrations)
+                        .addCallback(mCallback)
                         .build();
-
-                db.getOpenHelper().getWritableDatabase().getVersion();
+            }
+            if (db != null) {
+                db.getOpenHelper().getReadableDatabase().getVersion();
             }
             mDb.put(databaseName, db);
         } catch (Exception e) {

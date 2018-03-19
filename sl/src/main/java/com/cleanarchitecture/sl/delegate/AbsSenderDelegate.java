@@ -20,7 +20,7 @@ public abstract class AbsSenderDelegate<T extends SenderDelegating> implements S
 
     @Override
     public void processing(Object sender, Object object) {
-        if(sender != null) {
+        if (sender != null) {
             if (!mDelegates.containsKey(sender.getClass().getName())) {
                 final T delegate = mDelegateFactory.create(sender.getClass().getName());
                 mDelegates.put(sender.getClass().getName(), delegate);

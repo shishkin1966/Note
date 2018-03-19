@@ -5,6 +5,10 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Transaction;
+import android.arch.persistence.room.Update;
+
+
+import java.util.List;
 
 
 import shishkin.cleanarchitecture.note.data.Note;
@@ -19,10 +23,16 @@ public interface NoteDao {
     void insert(Note note);
 
     @Transaction
+    @Update(onConflict = ROLLBACK)
+    void update(Note note);
+
     @Delete
     void delete(Note note);
 
-    @Transaction
     @Query("DELETE FROM " + Note.TABLE)
     void delete();
+
+    @Query("SELECT * FROM " + Note.TABLE + " ORDER BY " + Note.Columns.created + " ASC")
+    List<Note> get();
+
 }

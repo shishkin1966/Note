@@ -2,7 +2,6 @@ package shishkin.cleanarchitecture.note.request;
 
 import com.cleanarchitecture.sl.repository.IDbProvider;
 import com.cleanarchitecture.sl.request.AbsRequest;
-import com.cleanarchitecture.sl.sl.ApplicationModule;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 

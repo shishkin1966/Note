@@ -1,6 +1,5 @@
 package com.cleanarchitecture.sl.sl;
 
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -111,7 +110,6 @@ public class BackStack {
     }
 
     public static void onBackPressed(final AbsActivity activity) {
-
         if (activity == null) return;
         if (!activity.validate()) {
             ErrorModule.getInstance().onError(NAME, activity.getName() + " не валидна", false);
@@ -124,7 +122,6 @@ public class BackStack {
             final FragmentManager.BackStackEntry backStackEntry = fm
                     .getBackStackEntryAt(backStackEntryCount - 1);
             final Fragment fragment = fm.findFragmentByTag(backStackEntry.getName());
-
             final OnBackPressListener onBackPressListener;
             if (OnBackPressListener.class.isInstance(fragment)) {
                 onBackPressListener = SafeUtils.cast(fragment);
@@ -132,15 +129,16 @@ public class BackStack {
                 onBackPressListener = null;
             }
 
-            if (onBackPressListener == null || !onBackPressListener.onBackPressed()) {
-                if (backStackEntryCount > 1) {
-                    activity.getParent().onBackPressed();
-                } else {
-                    ActivityCompat.finishAfterTransition(activity);
+            if (onBackPressListener == null) {
+                activity.onActivityBackPressed();
+            } else {
+                if (!onBackPressListener.onBackPressed()) {
+                    activity.onActivityBackPressed();
                 }
             }
         } else {
-            activity.getParent().onBackPressed();
+            ErrorModule.getInstance().onError(NAME, activity.getName() + " empty BackStack", false);
+            activity.exit();
         }
     }
 

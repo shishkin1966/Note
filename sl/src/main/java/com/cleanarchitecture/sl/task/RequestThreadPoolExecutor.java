@@ -6,6 +6,7 @@ import com.cleanarchitecture.common.utils.SafeUtils;
 import com.cleanarchitecture.sl.request.Request;
 import com.cleanarchitecture.sl.request.ResponseListener;
 import com.cleanarchitecture.sl.request.ResultRequest;
+import com.cleanarchitecture.sl.sl.ErrorModule;
 
 
 import java.lang.ref.WeakReference;
@@ -16,11 +17,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 
 public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IExecutor {
-    private ReentrantLock mLock;
+
     private Map<String, WeakReference<Request>> mRequests = Collections.synchronizedMap(new ConcurrentHashMap<String, WeakReference<Request>>());
 
     /**
@@ -33,39 +33,40 @@ public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IEx
      */
     public RequestThreadPoolExecutor(final int corePoolSize, final int maximumPoolSize, final long keepAliveTime, final TimeUnit unit, final BlockingQueue<Runnable> workQueue) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, new JobThreadFactory());
-
-        mLock = new ReentrantLock();
     }
 
     public void addRequest(Request request) {
         if (request == null) return;
 
-        mLock.lock();
-        try {
-            checkNullRequest();
+        checkNullRequest();
 
-            if (request.isDistinct()) {
-                if (mRequests.containsKey(request.getName())) {
-                    final Request oldRequest = mRequests.get(request.getName()).get();
-                    if (oldRequest != null) {
-                        oldRequest.setCanceled();
-                    }
+        if (request.isDistinct()) {
+            if (mRequests.containsKey(request.getName())) {
+                final Request oldRequest = mRequests.get(request.getName()).get();
+                if (oldRequest != null) {
+                    oldRequest.setCanceled();
                 }
             }
-
-            mRequests.put(request.getName(), new WeakReference<>(request));
-        } finally {
-            mLock.unlock();
         }
+        mRequests.put(request.getName(), new WeakReference<>(request));
 
         execute(request);
+    }
+
+    @Override
+    public void afterExecute(Runnable r, Throwable t) {
+        super.afterExecute(r, t);
+
+        if (t != null) {
+            ErrorModule.getInstance().onError(getClass().getName(), t);
+        }
     }
 
     public void clear() {
         mRequests.clear();
     }
 
-    private synchronized void checkNullRequest() {
+    private void checkNullRequest() {
         for (Map.Entry<String, WeakReference<Request>> entry : mRequests.entrySet()) {
             if (entry.getValue() == null || entry.getValue().get() == null) {
                 mRequests.remove(entry.getKey());
@@ -73,7 +74,7 @@ public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IEx
         }
     }
 
-    public synchronized void cancelRequests(ResponseListener listener) {
+    public void cancelRequests(ResponseListener listener) {
         if (listener == null) return;
 
         checkNullRequest();
@@ -88,7 +89,7 @@ public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IEx
         }
     }
 
-    public synchronized void shutdown() {
+    public void shutdown() {
         clear();
         shutdownNow();
     }
@@ -103,7 +104,9 @@ public class RequestThreadPoolExecutor extends ThreadPoolExecutor implements IEx
 
         @Override
         public Thread newThread(@NonNull Runnable runnable) {
-            return new Thread(runnable, "Thread_" + counter++);
+            final Thread thread = new Thread(runnable, "Thread_" + counter++);
+            thread.setPriority(Thread.NORM_PRIORITY);
+            return thread;
         }
     }
 

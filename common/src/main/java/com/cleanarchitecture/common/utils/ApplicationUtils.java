@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 
-
 import com.cleanarchitecture.common.ui.BaseSnackbar;
 
 

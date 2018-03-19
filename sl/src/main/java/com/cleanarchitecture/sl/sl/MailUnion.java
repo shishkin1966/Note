@@ -116,18 +116,17 @@ public class MailUnion extends AbsSmallUnion<MailSubscriber> implements IMailUni
         }
     }
 
-    private synchronized void checkAddMailSubscriber(final String address) {
+    private void checkAddMailSubscriber(final String address) {
         if (StringUtils.isNullOrEmpty(address)) {
             return;
         }
 
-        for (WeakReference<MailSubscriber> reference : getSubscribers()) {
-            if (reference != null && reference.get() != null) {
-                final MailSubscriber subscriber = reference.get();
-                if (address.equalsIgnoreCase(subscriber.getName())) {
-                    if (subscriber.getState() == ViewStateObserver.STATE_RESUME) {
-                        SLUtil.readMail(subscriber);
-                    }
+        List<WeakReference<MailSubscriber>> list = getSubscribers();
+        for (WeakReference<MailSubscriber> reference : list) {
+            final MailSubscriber subscriber = reference.get();
+            if (address.equalsIgnoreCase(subscriber.getName())) {
+                if (subscriber.getState() == ViewStateObserver.STATE_RESUME) {
+                    SLUtil.readMail(subscriber);
                 }
             }
         }
