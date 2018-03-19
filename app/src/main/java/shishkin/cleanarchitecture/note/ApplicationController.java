@@ -17,6 +17,8 @@ import shishkin.cleanarchitecture.note.db.NotesDb;
 
 public class ApplicationController extends ApplicationModule {
 
+    public static final String ACTION_CLICK = BuildConfig.APPLICATION_ID + ".ACTION_CLICK";
+
     @Override
     public void onStart() {
         super.onStart();
