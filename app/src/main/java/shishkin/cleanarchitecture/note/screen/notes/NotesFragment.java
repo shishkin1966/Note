@@ -125,10 +125,9 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        int position = viewHolder.getAdapterPosition();
+        final int position = viewHolder.getAdapterPosition();
         getModel().getInteractor().removeNote(mAdapter.getItem(position));
         mAdapter.remove(position);
-        //mAdapter.notifyItemRangeRemoved(position, 1);
     }
 
 

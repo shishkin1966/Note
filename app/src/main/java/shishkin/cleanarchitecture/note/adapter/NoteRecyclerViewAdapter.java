@@ -48,13 +48,15 @@ public class NoteRecyclerViewAdapter extends AbstractRecyclerViewAdapter<NoteIte
     }
 
     public void setFocusItem(int position) {
-        final ViewHolder holder = (ViewHolder)mRecyclerView.findViewHolderForAdapterPosition(position);
-        if (holder != null) {
-            holder.setFocus();
+        if (mRecyclerView != null) {
+            final ViewHolder holder = (ViewHolder) mRecyclerView.findViewHolderForAdapterPosition(position);
+            if (holder != null) {
+                holder.setFocus();
+            }
         }
     }
 
-    static class ViewHolder extends AbstractViewHolder  implements EditTextListener {
+    static class ViewHolder extends AbstractViewHolder implements EditTextListener {
 
         private EditText titleView;
         private TextView numbertView;

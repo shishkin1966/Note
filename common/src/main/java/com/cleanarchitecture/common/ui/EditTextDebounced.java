@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class EditTextDebounced implements TextWatcher, Runnable {
 
     private Handler mHandler = new Handler();
-    private long mDelay = TimeUnit.MILLISECONDS.toMillis(500);
+    private long mDelay = TimeUnit.MILLISECONDS.toMillis(300);
     private EditText mEditText;
     private EditTextListener mListener;
 

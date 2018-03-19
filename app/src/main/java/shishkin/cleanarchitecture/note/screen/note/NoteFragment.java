@@ -5,12 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
+import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
 import com.cleanarchitecture.common.utils.StringUtils;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
@@ -31,7 +33,7 @@ import shishkin.cleanarchitecture.note.data.NoteJson;
  * Created by Shishkin on 17.03.2018.
  */
 
-public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.OnFocusChangeListener {
+public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.OnFocusChangeListener, RecyclerViewSwipeListener {
 
     public static final String OPERATION_INSERT = "OPERATION_INSERT";
     public static final String OPERATION_EDIT = "OPERATION_EDIT";
@@ -82,6 +84,10 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
         mAdapter.setItems(mNoteJson.getItems());
         mRecyclerView.setAdapter(mAdapter);
 
+        final ItemTouchHelper.Callback callback = new SwipeTouchHelper(null, this);
+        final ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(mRecyclerView);
+
         mTitle = findView(R.id.title);
         mTitle.setText(mNoteJson.getTitle());
 
@@ -115,7 +121,7 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
     public boolean onBackPressed() {
         mNoteJson.setTitle(StringUtils.allTrim(mTitle.getText().toString()));
         final List<NoteItem> list = new ArrayList<>();
-        for (NoteItem item: mAdapter.getItems()) {
+        for (NoteItem item : mAdapter.getItems()) {
             if (!StringUtils.isNullOrEmpty(StringUtils.allTrim(item.getTitle()))) {
                 list.add(item);
             }
@@ -137,17 +143,18 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
         switch (v.getId()) {
             case R.id.add:
                 mAdapter.add(new NoteItem());
-                mRecyclerView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.setFocusItem(mAdapter.getItemCount() - 1);
-                    }
-                });
+                mRecyclerView.post(() -> mAdapter.setFocusItem(mAdapter.getItemCount() - 1));
                 break;
 
             default:
                 super.onClick(v);
                 break;
         }
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+        final int position = viewHolder.getAdapterPosition();
+        mAdapter.remove(position);
     }
 }
