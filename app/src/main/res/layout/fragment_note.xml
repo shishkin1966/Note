@@ -21,7 +21,7 @@
             android:layout_width="@dimen/width_toolbar"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:background="@color/white"
+            android:background="?colorPrimary"
             android:orientation="vertical">
 
             <ImageView
@@ -31,7 +31,28 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:background="@drawable/button_background"
+                android:scaleType="center"
                 app:srcCompat="@drawable/plus"/>
+
+            <ImageView
+                android:id="@+id/clock"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/button_background"
+                android:scaleType="center"
+                app:srcCompat="@drawable/clock"/>
+
+            <ImageView
+                android:id="@+id/calendar"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/button_background"
+                android:scaleType="center"
+                app:srcCompat="@drawable/calendar"/>
 
         </LinearLayout>
 

@@ -21,9 +21,12 @@ import shishkin.cleanarchitecture.note.data.NoteItem;
 public class NoteRecyclerViewAdapter extends AbstractRecyclerViewAdapter<NoteItem, NoteRecyclerViewAdapter.ViewHolder> {
 
     private RecyclerView mRecyclerView;
+    private View.OnFocusChangeListener mListener;
 
-    public NoteRecyclerViewAdapter(@NonNull Context context) {
+    public NoteRecyclerViewAdapter(@NonNull Context context, View.OnFocusChangeListener listener) {
         super(context);
+
+        mListener = listener;
 
         setHasStableIds(false);
     }
@@ -39,7 +42,7 @@ public class NoteRecyclerViewAdapter extends AbstractRecyclerViewAdapter<NoteIte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final View view = inflater.inflate(R.layout.item_noteitem, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
@@ -61,10 +64,12 @@ public class NoteRecyclerViewAdapter extends AbstractRecyclerViewAdapter<NoteIte
         private EditText titleView;
         private TextView numbertView;
 
-        ViewHolder(@NonNull final View itemView) {
+        ViewHolder(@NonNull final View itemView, View.OnFocusChangeListener listener) {
             super(itemView);
 
             titleView = findView(R.id.title);
+            titleView.setOnFocusChangeListener(listener);
+
             numbertView = findView(R.id.number);
         }
 
