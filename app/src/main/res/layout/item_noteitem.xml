@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/dimen_32dp"
+            android:minHeight="@dimen/dimen_24dp"
             android:orientation="horizontal">
 
             <TextView

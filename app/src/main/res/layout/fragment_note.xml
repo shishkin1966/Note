@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:background="@drawable/button_background"
                 android:scaleType="center"
-                app:srcCompat="@drawable/plus"/>
+                app:srcCompat="@drawable/selector_plus"/>
 
             <ImageView
                 android:id="@+id/clock"
@@ -42,7 +42,7 @@
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:background="@drawable/button_background"
                 android:scaleType="center"
-                app:srcCompat="@drawable/clock"/>
+                app:srcCompat="@drawable/selector_clock"/>
 
             <ImageView
                 android:id="@+id/calendar"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:background="@drawable/button_background"
                 android:scaleType="center"
-                app:srcCompat="@drawable/calendar"/>
+                app:srcCompat="@drawable/selector_calendar"/>
 
         </LinearLayout>
 
