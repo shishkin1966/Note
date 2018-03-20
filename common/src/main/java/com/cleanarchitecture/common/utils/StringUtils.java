@@ -565,6 +565,13 @@ public class StringUtils {
         return right(fill(SPACE, length) + str, length);
     }
 
+    public static String padLeft(String str, final int length, final String padChar) {
+        if (str == null) {
+            str = EMPTY;
+        }
+        return right(fill(padChar, length) + str, length);
+    }
+
     public static String insert(final String str, final int start,
                                 final String insertString) {
         if (str == null || insertString == null) {
