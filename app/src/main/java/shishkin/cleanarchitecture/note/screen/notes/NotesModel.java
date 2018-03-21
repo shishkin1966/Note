@@ -31,4 +31,9 @@ public class NotesModel extends AbsModel {
         return super.getInteractor();
     }
 
+    @Override
+    public NotesPresenter getPresenter() {
+        return super.getPresenter();
+    }
+
 }

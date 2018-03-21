@@ -104,10 +104,6 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_setting:
-                //getModel().getRouter().showSetting();
-                break;
-
             case R.id.menu_backup_dp:
                 getModel().getRouter().backupDb();
                 break;
@@ -128,24 +124,15 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         final int position = viewHolder.getAdapterPosition();
         getModel().getInteractor().removeNote(mAdapter.getItem(position));
         mAdapter.remove(position);
+        mRecyclerView.post(() -> getModel().getPresenter().onNotesChanged());
     }
 
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         mAdapter.move(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-        mRecyclerView.post(() -> afterMove());
+        mRecyclerView.post(() -> getModel().getPresenter().onNotesChanged());
         return true;
     }
-
-    private void afterMove() {
-        final List<Note> items = mAdapter.getItems();
-        for (int i = 0; i < items.size(); i++) {
-            items.get(i).setPoradok(i);
-        }
-        mAdapter.notifyDataSetChanged();
-        getModel().getInteractor().updateNotes(items);
-    }
-
 
     @Override
     public void setItems(List<Note> items) {
@@ -154,4 +141,8 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         }
     }
 
+    @Override
+    public List<Note> getItems() {
+        return mAdapter.getItems();
+    }
 }

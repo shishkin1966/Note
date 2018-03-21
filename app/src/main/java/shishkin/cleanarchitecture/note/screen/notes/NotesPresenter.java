@@ -10,6 +10,9 @@ import com.cleanarchitecture.sl.request.ResponseListener;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 
+import java.util.List;
+
+
 import shishkin.cleanarchitecture.note.R;
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.request.GetNotesRequest;
@@ -40,7 +43,9 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add:
-                getModel().getRouter().showNote(new Note());
+                final Note note = new Note();
+                note.setPoradok(getModel().getView().getItems().size());
+                getModel().getRouter().showNote(note);
                 break;
 
             default:
@@ -66,5 +71,14 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
             }
         }
     }
+
+    public void onNotesChanged() {
+        final List<Note> items = getModel().getView().getItems();
+        for (int i = 0; i < items.size(); i++) {
+            items.get(i).setPoradok(i);
+        }
+        getModel().getInteractor().updateNotes(items);
+    }
+
 
 }

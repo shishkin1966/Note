@@ -1,9 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_setting"
-        android:orderInCategory="105"
-        android:title="@string/setting"/>
-    <item
         android:id="@+id/menu_backup_dp"
         android:orderInCategory="110"
         android:title="@string/menu_backup_dp"/>

@@ -43,7 +43,7 @@ public class NotesRecyclerViewAdapter extends AbstractRecyclerViewAdapter<Note, 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, Note item, int position) {
-        holder.bind(position, getItem(position));
+        holder.bind(getItem(position));
     }
 
     static class ViewHolder extends AbstractViewHolder {
@@ -66,10 +66,7 @@ public class NotesRecyclerViewAdapter extends AbstractRecyclerViewAdapter<Note, 
             modifiedLL = findView(R.id.ll_modified);
         }
 
-        void bind(int position, @NonNull Note note) {
-            if (note.getPoradok() != position) {
-                note.setPoradok(position);
-            }
+        void bind(@NonNull Note note) {
             createdView.setText(StringUtils.formatDate(note.getCreated()));
             if (note.getModified() != null) {
                 modifiedView.setText(StringUtils.formatDate(note.getModified()));
