@@ -198,6 +198,11 @@ public class NoteFragment extends AbsToolbarFragment<NoteModel> implements View.
     }
 
     @Override
+    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+        return false;
+    }
+
+    @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (mCurrent == null) return;
 

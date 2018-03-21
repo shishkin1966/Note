@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
-import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
+import com.cleanarchitecture.common.ui.recyclerview.SwipeMoveTouchHelper;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
 import com.github.clans.fab.FloatingActionButton;
@@ -66,7 +66,7 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         });
         mRecyclerView.setAdapter(mAdapter);
 
-        final ItemTouchHelper.Callback callback = new SwipeTouchHelper(null, this);
+        final ItemTouchHelper.Callback callback = new SwipeMoveTouchHelper(mAdapter, this);
         final ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(mRecyclerView);
     }
@@ -130,6 +130,22 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         mAdapter.remove(position);
     }
 
+    @Override
+    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+        mAdapter.move(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+        mRecyclerView.post(() -> afterMove());
+        return true;
+    }
+
+    private void afterMove() {
+        final List<Note> items = mAdapter.getItems();
+        for (int i = 0; i < items.size(); i++) {
+            items.get(i).setPoradok(i);
+        }
+        mAdapter.notifyDataSetChanged();
+        getModel().getInteractor().updateNotes(items);
+    }
+
 
     @Override
     public void setItems(List<Note> items) {
@@ -137,4 +153,5 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
             mAdapter.setItems(items);
         }
     }
+
 }

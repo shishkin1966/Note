@@ -33,7 +33,7 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
 
     @Override
     public boolean isRegister() {
-        return false;
+        return true;
     }
 
     @Override
@@ -66,4 +66,5 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
             }
         }
     }
+
 }

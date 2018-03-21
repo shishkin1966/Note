@@ -16,9 +16,7 @@ public class SwipeTouchHelper extends ItemTouchHelper.SimpleCallback {
     public SwipeTouchHelper(AbstractRecyclerViewAdapter movieAdapter, RecyclerViewSwipeListener listener) {
         this(movieAdapter);
 
-        if (listener != null) {
-            mListener = listener;
-        }
+        mListener = listener;
     }
 
     @Override

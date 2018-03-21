@@ -62,19 +62,24 @@ public class WidgetFactory implements RemoteViewsService.RemoteViewsFactory {
         if (mData == null) return view;
 
         final NoteJson json = new Gson().fromJson(mData.get(position).getNote(), NoteJson.class);
+        view.setTextViewText(R.id.note, "");
+        view.setViewVisibility(R.id.note, View.GONE);
+
+        view.setTextViewText(R.id.title, "");
+        view.setViewVisibility(R.id.title, View.GONE);
+
         view.setTextViewText(R.id.title, json.getTitle());
-        if (StringUtils.isNullOrEmpty(json.getTitle())) {
-            view.setViewVisibility(R.id.title, View.GONE);
-        } else {
+        if (!StringUtils.isNullOrEmpty(json.getTitle())) {
             view.setViewVisibility(R.id.title, View.VISIBLE);
         }
+
         final List<NoteItem> items = json.getItems();
         if (items != null && !items.isEmpty()) {
             final StringBuilder sb = new StringBuilder();
             int row = 1;
             for (int i = 0; i < items.size(); i++) {
                 if (!StringUtils.isNullOrEmpty(StringUtils.allTrim(items.get(i).getTitle()))) {
-                    if (row != 1) {
+                    if (row > 1) {
                         sb.append("\n");
                     }
                     sb.append("" + (row) + ". " + items.get(i).getTitle());
@@ -82,9 +87,7 @@ public class WidgetFactory implements RemoteViewsService.RemoteViewsFactory {
                 }
             }
             view.setTextViewText(R.id.note, sb.toString());
-            if (StringUtils.isNullOrEmpty(sb.toString())) {
-                view.setViewVisibility(R.id.note, View.GONE);
-            } else {
+            if (!StringUtils.isNullOrEmpty(sb.toString())) {
                 view.setViewVisibility(R.id.note, View.VISIBLE);
             }
         }
