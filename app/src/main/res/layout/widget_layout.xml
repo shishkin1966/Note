@@ -5,23 +5,23 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/widget_background">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@color/blue_light"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/text_size_small"/>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/blue_light"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_size_small"/>
 
-        <ListView
-            android:id="@+id/list"
-            android:layout_below="@id/title"
-            android:divider="@color/gray_text"
-            android:dividerHeight="1dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
+    <ListView
+        android:id="@+id/list"
+        android:layout_below="@id/title"
+        android:divider="@color/gray_text"
+        android:dividerHeight="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
 
 </RelativeLayout>

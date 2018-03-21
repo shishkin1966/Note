@@ -6,6 +6,7 @@ import com.cleanarchitecture.sl.sl.SLUtil;
 
 
 import shishkin.cleanarchitecture.note.ApplicationController;
+import shishkin.cleanarchitecture.note.Session;
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.db.NotesDb;
 
@@ -42,7 +43,7 @@ public class InsertNoteRequest extends AbsRequest {
             db.setTransactionSuccessful();
             db.endTransaction();
 
-            ((ApplicationController) ApplicationController.getInstance()).onChangeNotes();
+            Session.getInstance().onChangeNotes();
         } catch (Exception e) {
             ErrorModule.getInstance().onError(getName(), e);
         }

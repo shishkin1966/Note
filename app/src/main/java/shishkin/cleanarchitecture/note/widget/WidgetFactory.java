@@ -14,6 +14,7 @@ import java.util.List;
 
 import shishkin.cleanarchitecture.note.ApplicationController;
 import shishkin.cleanarchitecture.note.R;
+import shishkin.cleanarchitecture.note.Session;
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.data.NoteItem;
 import shishkin.cleanarchitecture.note.data.NoteJson;
@@ -31,7 +32,7 @@ public class WidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     }
 
     private void getData() {
-        mData = ((ApplicationController) ApplicationController.getInstance()).getNotes();
+        mData = Session.getInstance().getNotes();
     }
 
     @Override
