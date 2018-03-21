@@ -5,26 +5,20 @@ import com.cleanarchitecture.sl.sl.ErrorModule;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 
-import shishkin.cleanarchitecture.note.ApplicationController;
 import shishkin.cleanarchitecture.note.Session;
-import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.db.NotesDb;
 
 /**
  * Created by Shishkin on 17.03.2018.
  */
 
-public class UpdateNoteRequest extends AbsRequest {
+public class SetSessionNotesRequest extends AbsRequest {
 
-    private Note mNote;
-
-    public UpdateNoteRequest(Note note) {
-        mNote = note;
-    }
+    public static final String NAME = SetSessionNotesRequest.class.getName();
 
     @Override
     public String getName() {
-        return UpdateNoteRequest.class.getName();
+        return NAME;
     }
 
     @Override
@@ -34,18 +28,11 @@ public class UpdateNoteRequest extends AbsRequest {
 
     @Override
     public void run() {
-        if (mNote == null) return;
-
         try {
             final NotesDb db = SLUtil.getDb();
-            db.beginTransaction();
-            db.NoteDao().update(mNote);
-            db.setTransactionSuccessful();
-            db.endTransaction();
-
-            Session.getInstance().onChangeNotes();
+            Session.getInstance().setNotes(db.NoteDao().get());
         } catch (Exception e) {
-            ErrorModule.getInstance().onError(getName(), e);
+            ErrorModule.getInstance().onError(NAME, e);
         }
     }
 }

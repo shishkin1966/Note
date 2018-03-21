@@ -12,6 +12,7 @@ import com.cleanarchitecture.sl.sl.SLUtil;
 
 import shishkin.cleanarchitecture.note.ApplicationController;
 import shishkin.cleanarchitecture.note.R;
+import shishkin.cleanarchitecture.note.Session;
 import shishkin.cleanarchitecture.note.db.NotesDb;
 import shishkin.cleanarchitecture.note.screen.main.MainActivity;
 import shishkin.cleanarchitecture.note.widget.ApplicationWidget;
@@ -50,7 +51,7 @@ public class WidgetUpdateRequest extends AbsRequest {
         if (context == null) return;
 
         final NotesDb db = SLUtil.getDb();
-        ((ApplicationController) ApplicationController.getInstance()).setNotes(db.NoteDao().get());
+        Session.getInstance().setNotes(db.NoteDao().get());
 
         for (int i = 0; i < mAppWidgetIds.length; i++) {
             int appWidgetId = mAppWidgetIds[i];
