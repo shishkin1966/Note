@@ -32,7 +32,7 @@ public interface NoteDao {
     @Query("DELETE FROM " + Note.TABLE)
     void delete();
 
-    @Query("SELECT * FROM " + Note.TABLE + " ORDER BY " + Note.Columns.created + " ASC")
+    @Query("SELECT * FROM " + Note.TABLE + " ORDER BY " + Note.Columns.poradok + " ASC")
     List<Note> get();
 
 }

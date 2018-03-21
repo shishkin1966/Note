@@ -5,16 +5,26 @@ import com.cleanarchitecture.sl.sl.ErrorModule;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 
+import java.util.List;
+
+
 import shishkin.cleanarchitecture.note.Session;
+import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.db.NotesDb;
 
 /**
  * Created by Shishkin on 17.03.2018.
  */
 
-public class SetSessionNotesRequest extends AbsRequest {
+public class SetNotesRequest extends AbsRequest {
 
-    public static final String NAME = SetSessionNotesRequest.class.getName();
+    public static final String NAME = SetNotesRequest.class.getName();
+
+    private List<Note> mItems;
+
+    public SetNotesRequest(List<Note> items) {
+        mItems = items;
+    }
 
     @Override
     public String getName() {
@@ -28,9 +38,15 @@ public class SetSessionNotesRequest extends AbsRequest {
 
     @Override
     public void run() {
+        if (mItems == null) return;
+
         try {
             final NotesDb db = SLUtil.getDb();
-            Session.getInstance().setNotes(db.NoteDao().get());
+            for (Note note : mItems) {
+                db.NoteDao().update(note);
+            }
+
+            Session.getInstance().onChangeNotes();
         } catch (Exception e) {
             ErrorModule.getInstance().onError(NAME, e);
         }

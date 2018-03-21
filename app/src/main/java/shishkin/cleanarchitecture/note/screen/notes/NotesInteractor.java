@@ -3,6 +3,9 @@ package shishkin.cleanarchitecture.note.screen.notes;
 import com.cleanarchitecture.sl.model.ModelInteractor;
 
 
+import java.util.List;
+
+
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.sl.Repository;
 
@@ -18,5 +21,9 @@ public class NotesInteractor implements ModelInteractor {
 
     public void removeNote(Note note) {
         Repository.removeNote(note);
+    }
+
+    public void updateNotes(List<Note> items) {
+        Repository.updateNotes(items);
     }
 }

@@ -16,4 +16,5 @@ public interface NotesView extends IFragment {
 
     void setItems(List<Note> items);
 
+    List<Note> getItems();
 }

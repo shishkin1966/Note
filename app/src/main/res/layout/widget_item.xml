@@ -14,16 +14,18 @@
         android:layout_marginRight="@dimen/dimen_8dp"
         android:textColor="@color/white_light"
         android:textSize="@dimen/text_size_large"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_4dp"
         android:layout_marginLeft="@dimen/dimen_8dp"
         android:layout_marginRight="@dimen/dimen_8dp"
-        android:layout_marginBottom="@dimen/dimen_4dp"
         android:textColor="@color/gray_switch"
-        android:textSize="@dimen/text_size_large"/>
+        android:textSize="@dimen/text_size_large"
+        android:visibility="gone"/>
 
 </LinearLayout>

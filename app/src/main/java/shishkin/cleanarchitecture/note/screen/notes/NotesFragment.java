@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cleanarchitecture.common.ui.recyclerview.RecyclerViewSwipeListener;
-import com.cleanarchitecture.common.ui.recyclerview.SwipeTouchHelper;
+import com.cleanarchitecture.common.ui.recyclerview.SwipeMoveTouchHelper;
 import com.cleanarchitecture.sl.presenter.impl.OnBackPressedPresenter;
 import com.cleanarchitecture.sl.ui.fragment.AbsToolbarFragment;
 import com.github.clans.fab.FloatingActionButton;
@@ -66,7 +66,7 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         });
         mRecyclerView.setAdapter(mAdapter);
 
-        final ItemTouchHelper.Callback callback = new SwipeTouchHelper(null, this);
+        final ItemTouchHelper.Callback callback = new SwipeMoveTouchHelper(mAdapter, this);
         final ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(mRecyclerView);
     }
@@ -104,10 +104,6 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_setting:
-                //getModel().getRouter().showSetting();
-                break;
-
             case R.id.menu_backup_dp:
                 getModel().getRouter().backupDb();
                 break;
@@ -128,13 +124,25 @@ public class NotesFragment extends AbsToolbarFragment<NotesModel> implements Rec
         final int position = viewHolder.getAdapterPosition();
         getModel().getInteractor().removeNote(mAdapter.getItem(position));
         mAdapter.remove(position);
+        mRecyclerView.post(() -> getModel().getPresenter().onNotesChanged());
     }
 
+    @Override
+    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+        mAdapter.move(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+        mRecyclerView.post(() -> getModel().getPresenter().onNotesChanged());
+        return true;
+    }
 
     @Override
     public void setItems(List<Note> items) {
         if (items != null) {
             mAdapter.setItems(items);
         }
+    }
+
+    @Override
+    public List<Note> getItems() {
+        return mAdapter.getItems();
     }
 }

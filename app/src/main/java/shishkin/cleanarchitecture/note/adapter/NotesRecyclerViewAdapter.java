@@ -66,7 +66,7 @@ public class NotesRecyclerViewAdapter extends AbstractRecyclerViewAdapter<Note, 
             modifiedLL = findView(R.id.ll_modified);
         }
 
-        void bind(@NonNull final Note note) {
+        void bind(@NonNull Note note) {
             createdView.setText(StringUtils.formatDate(note.getCreated()));
             if (note.getModified() != null) {
                 modifiedView.setText(StringUtils.formatDate(note.getModified()));

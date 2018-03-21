@@ -24,13 +24,15 @@ public class Note extends AbsEntity implements Parcelable {
         String created = "created";
         String modified = "modified";
         String note = "note";
+        String poradok = "poradok";
     }
 
     public static final String[] PROJECTION = {
             Columns.id,
             Columns.created,
             Columns.modified,
-            Columns.note
+            Columns.note,
+            Columns.poradok
     };
 
     @ColumnInfo(name = "id")
@@ -52,8 +54,13 @@ public class Note extends AbsEntity implements Parcelable {
     @SerializedName(Columns.note)
     private String mNote;
 
+    @ColumnInfo(name = Columns.poradok)
+    @SerializedName(Columns.poradok)
+    private int mPoradok;
+
     public Note() {
         mCreated = System.currentTimeMillis();
+        mPoradok = 0;
     }
 
     @NonNull
@@ -90,6 +97,14 @@ public class Note extends AbsEntity implements Parcelable {
         this.mNote = note;
     }
 
+    public int getPoradok() {
+        return mPoradok;
+    }
+
+    public void setPoradok(int poradok) {
+        this.mPoradok = poradok;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -101,6 +116,7 @@ public class Note extends AbsEntity implements Parcelable {
         dest.writeValue(this.mCreated);
         dest.writeValue(this.mModified);
         dest.writeString(this.mNote);
+        dest.writeInt(this.mPoradok);
     }
 
     protected Note(Parcel in) {
@@ -108,6 +124,7 @@ public class Note extends AbsEntity implements Parcelable {
         this.mCreated = (Long) in.readValue(Long.class.getClassLoader());
         this.mModified = (Long) in.readValue(Long.class.getClassLoader());
         this.mNote = in.readString();
+        this.mPoradok = in.readInt();
     }
 
     public static final Parcelable.Creator<Note> CREATOR = new Parcelable.Creator<Note>() {

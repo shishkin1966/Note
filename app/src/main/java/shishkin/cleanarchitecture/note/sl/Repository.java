@@ -3,12 +3,16 @@ package shishkin.cleanarchitecture.note.sl;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 
+import java.util.List;
+
+
 import shishkin.cleanarchitecture.note.data.Note;
 import shishkin.cleanarchitecture.note.request.DbBackupRequest;
 import shishkin.cleanarchitecture.note.request.DbRestoreRequest;
 import shishkin.cleanarchitecture.note.request.GetNotesRequest;
 import shishkin.cleanarchitecture.note.request.InsertNoteRequest;
 import shishkin.cleanarchitecture.note.request.RemoveNoteRequest;
+import shishkin.cleanarchitecture.note.request.SetNotesRequest;
 import shishkin.cleanarchitecture.note.request.UpdateNoteRequest;
 
 /**
@@ -44,5 +48,7 @@ public class Repository {
         SLUtil.getDbProvider().request(new RemoveNoteRequest(note));
     }
 
-
+    public static void updateNotes(List<Note> items) {
+        SLUtil.getDbProvider().request(new SetNotesRequest(items));
+    }
 }

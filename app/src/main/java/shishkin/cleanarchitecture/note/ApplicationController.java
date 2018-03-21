@@ -10,7 +10,6 @@ import java.io.File;
 
 
 import shishkin.cleanarchitecture.note.db.NotesDb;
-import shishkin.cleanarchitecture.note.request.SetSessionNotesRequest;
 
 /**
  * Created by Shishkin on 08.02.2018.
@@ -28,8 +27,6 @@ public class ApplicationController extends ApplicationModule {
         SLUtil.getDbProvider().getDb(NotesDb.class, NotesDb.NAME);
 
         Session.instantiate();
-
-        SLUtil.getRequestModule().request(this, new SetSessionNotesRequest());
     }
 
     @Override
