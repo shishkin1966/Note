@@ -11,10 +11,10 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_marginLeft="@dimen/dimen_8dp"
-            android:layout_marginRight="@dimen/dimen_8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_8dp"
+            android:layout_marginRight="@dimen/dimen_8dp"
             android:textColor="@color/blue"
             android:textSize="@dimen/text_size_xlarge"/>
 
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_dark"
-            android:textSize="@dimen/text_size_large"/>
+            android:textSize="@dimen/text_size_xlarge"/>
 
         <LinearLayout
             android:layout_width="match_parent"
