@@ -27,12 +27,12 @@ public abstract class AbsShortlyLiveModule extends AbsModule implements AutoComp
         }
     }
 
-    public synchronized void post() {
+    public void post() {
         mServiceHandler.post(true);
     }
 
     @Override
-    public synchronized void onShutdown(AutoCompleteHandler handler) {
+    public void onShutdown(AutoCompleteHandler handler) {
         SL.getInstance().unregisterModule(getName());
     }
 }

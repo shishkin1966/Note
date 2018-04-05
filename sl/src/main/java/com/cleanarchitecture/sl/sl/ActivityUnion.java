@@ -62,7 +62,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void register(final IActivity subscriber) {
+    public void register(final IActivity subscriber) {
         super.register(subscriber);
 
         for (int i = mActivities.size() - 1; i >= 0; i--) {
@@ -89,7 +89,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void unregister(final IActivity subscriber) {
+    public void unregister(final IActivity subscriber) {
         super.unregister(subscriber);
 
         for (int i = mActivities.size() - 1; i >= 0; i--) {
@@ -111,7 +111,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized boolean checkPermission(String permission) {
+    public boolean checkPermission(String permission) {
         if (ApplicationUtils.hasMarshmallow()) {
             final IActivity subscriber = getCurrentSubscriber();
             if (subscriber != null && subscriber.validate() && (subscriber.getActivity().getState() == ViewStateObserver.STATE_RESUME || subscriber.getActivity().getState() == ViewStateObserver.STATE_PAUSE)) {
@@ -124,7 +124,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void checkGooglePlayServices() {
+    public void checkGooglePlayServices() {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             if (subscriber.getActivity().getState() == ViewStateObserver.STATE_RESUME || subscriber.getActivity().getState() == ViewStateObserver.STATE_PAUSE) {
@@ -142,7 +142,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void grantPermission(String permission, String helpMessage) {
+    public void grantPermission(String permission, String helpMessage) {
         if (ApplicationUtils.hasMarshmallow()) {
             final IActivity subscriber = getCurrentSubscriber();
             if (subscriber != null && subscriber.validate()) {
@@ -163,7 +163,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showSnackbar(ShowMessageEvent event) {
+    public void showSnackbar(ShowMessageEvent event) {
         final IActivity subscriber = getCurrentSubscriber();
         View view = null;
         if (subscriber != null && subscriber.validate()) {
@@ -192,7 +192,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showErrorMessage(ShowErrorMessageEvent event) {
+    public void showErrorMessage(ShowErrorMessageEvent event) {
         if (event.getErrorText().contains(":" + ErrorCode.ERROR_NOT_NETWORK + ".")) return;
 
         final IActivity subscriber = getCurrentSubscriber();
@@ -216,7 +216,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showToast(ShowMessageEvent event) {
+    public void showToast(ShowMessageEvent event) {
         final IActivity activity = getCurrentSubscriber();
         if (activity == null || !activity.validate()) {
             ErrorModule.getInstance().onError(NAME + ":showToast", "Подписчик не найден или он не работоспособный", false);
@@ -252,7 +252,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void hideKeyboard() {
+    public void hideKeyboard() {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null) {
             subscriber.hideKeyboard();
@@ -260,7 +260,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showKeyboard(ShowKeyboardEvent event) {
+    public void showKeyboard(ShowKeyboardEvent event) {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             subscriber.showKeyboard(event.getView());
@@ -268,7 +268,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showProgressBar() {
+    public void showProgressBar() {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             if (AbsContentActivity.class.isInstance(subscriber)) {
@@ -282,7 +282,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void hideProgressBar() {
+    public void hideProgressBar() {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null) {
             if (AbsContentActivity.class.isInstance(subscriber)) {
@@ -296,7 +296,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showProgressDialog(final ShowProgressDialogEvent event) {
+    public void showProgressDialog(final ShowProgressDialogEvent event) {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             subscriber.showProgressDialog(event.getTitle());
@@ -304,7 +304,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void hideProgressDialog() {
+    public void hideProgressDialog() {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null) {
             subscriber.hideProgressDialog();
@@ -312,7 +312,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showListDialog(ShowListDialogEvent event) {
+    public void showListDialog(ShowListDialogEvent event) {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             if (subscriber.getActivity().getState() == ViewStateObserver.STATE_RESUME || subscriber.getActivity().getState() == ViewStateObserver.STATE_PAUSE) {
@@ -324,7 +324,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showEditDialog(ShowEditDialogEvent event) {
+    public void showEditDialog(ShowEditDialogEvent event) {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             if (subscriber.getActivity().getState() == ViewStateObserver.STATE_RESUME || subscriber.getActivity().getState() == ViewStateObserver.STATE_PAUSE) {
@@ -335,7 +335,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showDialog(ShowDialogEvent event) {
+    public void showDialog(ShowDialogEvent event) {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             if (subscriber.getActivity().getState() == ViewStateObserver.STATE_RESUME || subscriber.getActivity().getState() == ViewStateObserver.STATE_PAUSE) {
@@ -345,7 +345,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void onDialogResult(DialogResultEvent event) {
+    public void onDialogResult(DialogResultEvent event) {
         if (event.getId() == R.id.dialog_show_lock_screen_setting) {
             if (event.getResult().getString(MaterialDialogExt.BUTTON).equals(MaterialDialogExt.POSITIVE)) {
                 final IActivity subscriber = getCurrentSubscriber();
@@ -371,7 +371,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void onFinishApplication() {
+    public void onFinishApplication() {
         for (WeakReference<IActivity> ref : mActivities) {
             if (ref != null && ref.get() != null) {
                 ref.get().exit();
@@ -380,7 +380,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void onUnRegisterLastSubscriber() {
+    public void onUnRegisterLastSubscriber() {
         if (ApplicationModule.getInstance().isFinished()) {
             if (ApplicationModule.getInstance().isKillOnFinish()) {
                 android.os.Process.killProcess(android.os.Process.myPid());
@@ -389,7 +389,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void showLockScreenSetting() {
+    public void showLockScreenSetting() {
         final Context context = ApplicationModule.getInstance();
         if (context != null) {
             showDialog(new ShowDialogEvent(R.id.dialog_show_lock_screen_setting, this.getName(), null, context.getString(R.string.error_lock_keystore), R.string.goto_lock_screen_setting, R.string.exit, false));
@@ -397,7 +397,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized void checkLocationService() {
+    public void checkLocationService() {
         final Context context = SLUtil.getContext();
         if (context == null) return;
 
@@ -412,7 +412,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
     }
 
     @Override
-    public synchronized LayoutInflater getInflater() {
+    public LayoutInflater getInflater() {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             return LayoutInflater.from((AbsActivity) subscriber);

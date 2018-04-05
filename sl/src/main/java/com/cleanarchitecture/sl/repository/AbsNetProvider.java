@@ -54,7 +54,7 @@ public abstract class AbsNetProvider<T> extends AbsProvider implements INetProvi
     }
 
     @Override
-    public synchronized void request(final Request request) {
+    public void request(final Request request) {
         if (request != null && validate()) {
             SLUtil.getRequestModule().request(this, request);
         }
@@ -74,7 +74,7 @@ public abstract class AbsNetProvider<T> extends AbsProvider implements INetProvi
     public void onUnRegisterModule() {
     }
 
-    public synchronized void cancelRequests(ResponseListener listener) {
+    public void cancelRequests(ResponseListener listener) {
         SLUtil.getRequestModule().cancelRequests(this, listener);
     }
 

@@ -93,7 +93,7 @@ public abstract class AbsContentFragment<M extends AbsModel> extends AbsFragment
     }
 
     @Override
-    public synchronized void exit() {
+    public void exit() {
         SLUtil.getRoutingUnion().back();
     }
 

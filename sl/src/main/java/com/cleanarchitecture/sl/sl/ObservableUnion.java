@@ -30,14 +30,14 @@ public class ObservableUnion extends AbsSmallUnion<ObservableSubscriber> impleme
     }
 
     @Override
-    public synchronized void register(final IObservable observable) {
+    public void register(final IObservable observable) {
         if (observable == null) return;
 
         mObservables.put(observable.getName(), observable);
     }
 
     @Override
-    public synchronized void unregister(String name) {
+    public void unregister(String name) {
         if (StringUtils.isNullOrEmpty(name)) return;
 
         if (mObservables.containsKey(name)) {
@@ -47,7 +47,7 @@ public class ObservableUnion extends AbsSmallUnion<ObservableSubscriber> impleme
     }
 
     @Override
-    public synchronized void register(final ObservableSubscriber subscriber) {
+    public void register(final ObservableSubscriber subscriber) {
         if (subscriber == null) return;
 
         super.register(subscriber);
@@ -66,7 +66,7 @@ public class ObservableUnion extends AbsSmallUnion<ObservableSubscriber> impleme
     }
 
     @Override
-    public synchronized void unregister(final ObservableSubscriber subscriber) {
+    public void unregister(final ObservableSubscriber subscriber) {
         if (subscriber == null) return;
 
         super.unregister(subscriber);
@@ -94,7 +94,7 @@ public class ObservableUnion extends AbsSmallUnion<ObservableSubscriber> impleme
     }
 
     @Override
-    public synchronized IObservable get(final String name) {
+    public IObservable get(final String name) {
         if (StringUtils.isNullOrEmpty(name)) return null;
 
         if (mObservables.containsKey(name)) {
@@ -104,7 +104,7 @@ public class ObservableUnion extends AbsSmallUnion<ObservableSubscriber> impleme
     }
 
     @Override
-    public synchronized List<IObservable> getObservables() {
+    public List<IObservable> getObservables() {
         final List<IObservable> list = new ArrayList<>();
         for (IObservable observable : mObservables.values()) {
             if (observable != null) {

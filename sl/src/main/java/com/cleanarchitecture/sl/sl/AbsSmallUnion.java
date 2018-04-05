@@ -29,7 +29,7 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
     }
 
     @Override
-    public synchronized void register(final T subscriber) {
+    public void register(final T subscriber) {
         if (subscriber == null) {
             return;
         }
@@ -51,7 +51,7 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
     }
 
     @Override
-    public synchronized void unregister(final T subscriber) {
+    public void unregister(final T subscriber) {
         if (subscriber == null) {
             return;
         }
@@ -83,7 +83,7 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
     }
 
     @Override
-    public synchronized List<WeakReference<T>> getSubscribers() {
+    public List<WeakReference<T>> getSubscribers() {
         checkNullSubscriber();
 
         final List<WeakReference<T>> list = new ArrayList<>();
@@ -92,7 +92,7 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
     }
 
     @Override
-    public synchronized T getSubscriber(final String name) {
+    public T getSubscriber(final String name) {
         checkNullSubscriber();
 
         if (StringUtils.isNullOrEmpty(name)) return null;
@@ -110,14 +110,14 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
     }
 
     @Override
-    public synchronized boolean hasSubscribers() {
+    public boolean hasSubscribers() {
         checkNullSubscriber();
 
         return (!mSubscribers.isEmpty());
     }
 
     @Override
-    public synchronized Result<Boolean> validateExt(final String name) {
+    public Result<Boolean> validateExt(final String name) {
         final T subscriber = getSubscriber(name);
         if (subscriber != null) {
             return subscriber.validateExt();
@@ -126,11 +126,11 @@ public abstract class AbsSmallUnion<T extends ModuleSubscriber> extends AbsModul
     }
 
     @Override
-    public synchronized boolean validate(final String name) {
+    public boolean validate(final String name) {
         return validateExt().getData();
     }
 
     @Override
-    public synchronized void onFinishApplication() {
+    public void onFinishApplication() {
     }
 }

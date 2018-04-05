@@ -13,7 +13,7 @@ public class ServiceLocatorModuleFactory implements ModuleFactory {
     public ServiceLocatorModuleFactory() {
     }
 
-    public synchronized <T extends Module> T create(final String name) {
+    public <T extends Module> T create(final String name) {
 
         if (StringUtils.isNullOrEmpty(name)) return null;
 

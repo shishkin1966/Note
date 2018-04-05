@@ -252,7 +252,7 @@ public abstract class AbsActivity<M extends Model> extends AppCompatActivity
     }
 
     @Override
-    public synchronized void exit() {
+    public void exit() {
         if (ApplicationUtils.hasLollipop()) {
             super.finishAndRemoveTask();
         } else if (ApplicationUtils.hasJellyBean()) {
@@ -280,11 +280,11 @@ public abstract class AbsActivity<M extends Model> extends AppCompatActivity
     }
 
     @Override
-    public synchronized void onPermisionGranted(final String permission) {
+    public void onPermisionGranted(final String permission) {
     }
 
     @Override
-    public synchronized void onPermisionDenied(final String permission) {
+    public void onPermisionDenied(final String permission) {
     }
 
     @Override

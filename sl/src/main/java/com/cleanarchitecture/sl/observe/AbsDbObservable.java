@@ -22,7 +22,7 @@ public abstract class AbsDbObservable extends AbsObservable<String> {
     private Map<String, List<String>> mTables = Collections.synchronizedMap(new ConcurrentHashMap<String, List<String>>());
 
     @Override
-    public synchronized void addObserver(ObservableSubscriber subscriber) {
+    public void addObserver(ObservableSubscriber subscriber) {
         if (subscriber == null) return;
 
         super.addObserver(subscriber);
@@ -41,7 +41,7 @@ public abstract class AbsDbObservable extends AbsObservable<String> {
     }
 
     @Override
-    public synchronized void removeObserver(ObservableSubscriber subscriber) {
+    public void removeObserver(ObservableSubscriber subscriber) {
         if (subscriber == null) return;
 
         super.removeObserver(subscriber);
@@ -56,7 +56,7 @@ public abstract class AbsDbObservable extends AbsObservable<String> {
     }
 
     @Override
-    public synchronized void onChange(String object) {
+    public void onChange(String object) {
 
         if (StringUtils.isNullOrEmpty(object)) return;
 

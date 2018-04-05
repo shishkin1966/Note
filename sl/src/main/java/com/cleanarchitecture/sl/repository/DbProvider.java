@@ -55,7 +55,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
     public DbProvider() {
     }
 
-    private synchronized boolean connect(final Class<T> klass, final String databaseName, Migration... migrations) {
+    private boolean connect(final Class<T> klass, final String databaseName, Migration... migrations) {
         final Context context = SLUtil.getContext();
         if (context == null) {
             return false;
@@ -83,7 +83,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
         return isConnected(databaseName);
     }
 
-    private synchronized boolean disconnect(final String databaseName) {
+    private boolean disconnect(final String databaseName) {
         if (isConnected(databaseName)) {
             final T db = mDb.get(databaseName);
             try {
@@ -96,7 +96,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
         return !isConnected(databaseName);
     }
 
-    private synchronized boolean isConnected(final String databaseName) {
+    private boolean isConnected(final String databaseName) {
         if (StringUtils.isNullOrEmpty(databaseName)) {
             return false;
         }
@@ -105,7 +105,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
     }
 
     @Override
-    public synchronized void backup(final String databaseName, final String dirBackup) {
+    public void backup(final String databaseName, final String dirBackup) {
         final T db = mDb.get(databaseName);
         if (db == null) {
             return;
@@ -175,7 +175,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
     }
 
     @Override
-    public synchronized void restore(final String databaseName, final String dirBackup) {
+    public void restore(final String databaseName, final String dirBackup) {
         if (!ApplicationUtils.checkPermission(ApplicationModule.getInstance(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             ApplicationUtils.runOnUiThread(() -> ApplicationUtils.grantPermisions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, SLUtil.getActivity()));
             return;
@@ -224,7 +224,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
     }
 
     @Override
-    public synchronized T getDb(final Class<T> klass, final String databaseName) {
+    public T getDb(final Class<T> klass, final String databaseName) {
         if (!isConnected(databaseName)) {
             connect(klass, databaseName);
         }
@@ -232,7 +232,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
     }
 
     @Override
-    public synchronized T getDb(final Class<T> klass, final String databaseName, Migration... migrations) {
+    public T getDb(final Class<T> klass, final String databaseName, Migration... migrations) {
         if (!isConnected(databaseName)) {
             connect(klass, databaseName, migrations);
         }
@@ -240,7 +240,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
     }
 
     @Override
-    public synchronized T getDb(final String databaseName) {
+    public T getDb(final String databaseName) {
         if (mDb.containsKey(databaseName)) {
             return mDb.get(databaseName);
         }
@@ -248,7 +248,7 @@ public class DbProvider<T extends RoomDatabase> extends AbsProvider implements I
     }
 
     @Override
-    public synchronized T getDb() {
+    public T getDb() {
         if (!mDb.isEmpty()) {
             return mDb.values().iterator().next();
         }

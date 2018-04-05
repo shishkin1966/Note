@@ -91,7 +91,7 @@ public class ErrorModule implements IErrorModule {
     }
 
     @Override
-    public synchronized void onError(final String source, final Exception e) {
+    public void onError(final String source, final Exception e) {
         if (BuildConfig.DEBUG) {
             ApplicationUtils.showToast(ApplicationModule.getInstance(), e.getMessage(), Toast.LENGTH_LONG, BaseSnackbar.MESSAGE_TYPE_ERROR);
             Log.e(source, e);
@@ -101,7 +101,7 @@ public class ErrorModule implements IErrorModule {
     }
 
     @Override
-    public synchronized void onError(final String source, final Throwable throwable) {
+    public void onError(final String source, final Throwable throwable) {
         if (BuildConfig.DEBUG) {
             ApplicationUtils.showToast(ApplicationModule.getInstance(), throwable.getMessage(), Toast.LENGTH_LONG, BaseSnackbar.MESSAGE_TYPE_ERROR);
             Log.e(source, throwable);
@@ -111,7 +111,7 @@ public class ErrorModule implements IErrorModule {
     }
 
     @Override
-    public synchronized void onError(final String source, final Exception e, final String displayMessage) {
+    public void onError(final String source, final Exception e, final String displayMessage) {
         onError(source, e);
 
         if (!StringUtils.isNullOrEmpty(displayMessage)) {
@@ -122,7 +122,7 @@ public class ErrorModule implements IErrorModule {
     }
 
     @Override
-    public synchronized void onError(final String source, final String message, final boolean isDisplay) {
+    public void onError(final String source, final String message, final boolean isDisplay) {
         if (!StringUtils.isNullOrEmpty(message)) {
             if (BuildConfig.DEBUG && !isDisplay) {
                 ApplicationUtils.showToast(ApplicationModule.getInstance(), message, Toast.LENGTH_LONG, BaseSnackbar.MESSAGE_TYPE_ERROR);
@@ -137,7 +137,7 @@ public class ErrorModule implements IErrorModule {
     }
 
     @Override
-    public synchronized void onError(final ExtError extError) {
+    public void onError(final ExtError extError) {
         if (extError != null && extError.hasError()) {
             if (SLUtil.getActivityUnion().validate()) {
                 SLUtil.getActivityUnion().showErrorMessage(new ShowErrorMessageEvent(extError.getErrorText() + getSufix()));
@@ -146,12 +146,12 @@ public class ErrorModule implements IErrorModule {
     }
 
     @Override
-    public synchronized String getPath() {
+    public String getPath() {
         return Log.getPath();
     }
 
     @Override
-    public synchronized void clearLog() {
+    public void clearLog() {
         final File log = new File(getPath());
         if (log.exists()) {
             log.delete();

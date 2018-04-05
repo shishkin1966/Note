@@ -23,7 +23,7 @@ public class RoutingUnion extends AbsUnion<Router> implements IRoutingUnion {
     }
 
     @Override
-    public synchronized <F> F getFragment(Class<F> cls, int id) {
+    public <F> F getFragment(Class<F> cls, int id) {
         final AbsActivity activity = getActivity();
         if (activity != null) {
             return BackStack.getFragment(activity, cls, id);
@@ -72,7 +72,7 @@ public class RoutingUnion extends AbsUnion<Router> implements IRoutingUnion {
     }
 
     @Override
-    public synchronized <C> C getActivity() {
+    public <C> C getActivity() {
         final Router subscriber = getCurrentSubscriber();
         if (subscriber != null && AbsActivity.class.isInstance(subscriber)) {
             return (C) subscriber;
@@ -81,7 +81,7 @@ public class RoutingUnion extends AbsUnion<Router> implements IRoutingUnion {
     }
 
     @Override
-    public synchronized LayoutInflater getInflater() {
+    public LayoutInflater getInflater() {
         final AbsActivity activity = getActivity();
         if (activity != null) {
             return LayoutInflater.from(activity);
@@ -90,12 +90,12 @@ public class RoutingUnion extends AbsUnion<Router> implements IRoutingUnion {
     }
 
     @Override
-    public synchronized <C> C getActivity(final String name) {
+    public <C> C getActivity(final String name) {
         return getActivity(name, false);
     }
 
     @Override
-    public synchronized <C> C getActivity(final String name, final boolean validate) {
+    public <C> C getActivity(final String name, final boolean validate) {
         final Router subscriber = getSubscriber(name);
         if (subscriber != null && AbsActivity.class.isInstance(subscriber)) {
             if (!validate || (validate && subscriber.validate())) {
@@ -106,7 +106,7 @@ public class RoutingUnion extends AbsUnion<Router> implements IRoutingUnion {
     }
 
     @Override
-    public synchronized void startActivity(final StartActivityEvent event) {
+    public void startActivity(final StartActivityEvent event) {
         if (event != null) {
             final AbsActivity activity = getActivity();
             if (activity != null) {
@@ -116,7 +116,7 @@ public class RoutingUnion extends AbsUnion<Router> implements IRoutingUnion {
     }
 
     @Override
-    public synchronized void startChooseActivity(final StartChooseActivityEvent event) {
+    public void startChooseActivity(final StartChooseActivityEvent event) {
         if (event != null) {
             final AbsActivity activity = getActivity();
             if (activity != null) {
@@ -126,7 +126,7 @@ public class RoutingUnion extends AbsUnion<Router> implements IRoutingUnion {
     }
 
     @Override
-    public synchronized void startActivityForResult(final StartActivityForResultEvent event) {
+    public void startActivityForResult(final StartActivityForResultEvent event) {
         if (event != null) {
             final AbsActivity activity = getActivity();
             if (activity != null) {

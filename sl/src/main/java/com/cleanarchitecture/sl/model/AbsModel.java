@@ -86,12 +86,12 @@ public abstract class AbsModel implements Model {
     }
 
     @Override
-    public synchronized int getState() {
+    public int getState() {
         return mLifecycle.getState();
     }
 
     @Override
-    public synchronized void setState(final int state) {
+    public void setState(final int state) {
         mLifecycle.setState(state);
     }
 
