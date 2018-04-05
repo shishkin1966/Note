@@ -30,7 +30,7 @@ public class UseCasesModule extends AbsModule implements IUseCasesModule {
     }
 
     @Override
-    public synchronized void onSnackBarClick(final OnSnackBarClickEvent event) {
+    public void onSnackBarClick(final OnSnackBarClickEvent event) {
         SnackbarOnClickUseCase.onClick(event);
     }
 

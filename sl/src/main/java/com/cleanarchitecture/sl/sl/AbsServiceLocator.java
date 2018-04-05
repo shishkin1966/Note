@@ -18,12 +18,12 @@ public abstract class AbsServiceLocator implements ServiceLocator {
 
     private Map<String, Module> mModules = Collections.synchronizedMap(new ConcurrentHashMap<String, Module>());
 
-    public synchronized String getShortName(final String name) {
+    public String getShortName(final String name) {
         return StringUtils.last(name, "\\.");
     }
 
     @Override
-    public synchronized <C> C get(final String name) {
+    public <C> C get(final String name) {
         if (!exists(name)) {
             if (!registerModule(name)) {
                 return null;
@@ -44,7 +44,7 @@ public abstract class AbsServiceLocator implements ServiceLocator {
     }
 
     @Override
-    public synchronized boolean exists(final String moduleName) {
+    public boolean exists(final String moduleName) {
         if (StringUtils.isNullOrEmpty(moduleName)) {
             return false;
         }
@@ -53,7 +53,7 @@ public abstract class AbsServiceLocator implements ServiceLocator {
     }
 
     @Override
-    public synchronized boolean registerModule(final Module newModule) {
+    public boolean registerModule(final Module newModule) {
         if (newModule != null && !StringUtils.isNullOrEmpty(newModule.getName())) {
             if (mModules.containsKey(getShortName(newModule.getName()))) {
                 if (newModule.compareTo(get(getShortName(newModule.getName()))) != 0) {
@@ -120,7 +120,7 @@ public abstract class AbsServiceLocator implements ServiceLocator {
     }
 
     @Override
-    public synchronized boolean unregisterModule(final String name) {
+    public boolean unregisterModule(final String name) {
         if (!StringUtils.isNullOrEmpty(name)) {
             try {
                 final String moduleName = getShortName(name);
@@ -162,7 +162,7 @@ public abstract class AbsServiceLocator implements ServiceLocator {
     }
 
     @Override
-    public synchronized boolean register(final ModuleSubscriber subscriber) {
+    public boolean register(final ModuleSubscriber subscriber) {
         if (subscriber != null && !StringUtils.isNullOrEmpty(subscriber.getName())) {
             try {
                 final List<String> types = subscriber.getModuleSubscription();
@@ -192,7 +192,7 @@ public abstract class AbsServiceLocator implements ServiceLocator {
     }
 
     @Override
-    public synchronized boolean unregister(final ModuleSubscriber subscriber) {
+    public boolean unregister(final ModuleSubscriber subscriber) {
         if (subscriber != null) {
             try {
                 final List<String> types = subscriber.getModuleSubscription();
@@ -219,7 +219,7 @@ public abstract class AbsServiceLocator implements ServiceLocator {
     }
 
     @Override
-    public synchronized boolean setCurrentSubscriber(final ModuleSubscriber subscriber) {
+    public boolean setCurrentSubscriber(final ModuleSubscriber subscriber) {
         try {
             if (subscriber != null) {
                 final List<String> types = subscriber.getModuleSubscription();

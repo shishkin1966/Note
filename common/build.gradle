@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 def supportLibVersion = "26.0.2"
 def compileSdk = 26
-def buildTools = "26.0.2"
+def buildTools = "27.0.3"
 def minSdk = 15
 def targetSdk = 26
 def playServices = "11.2.0"

@@ -104,7 +104,7 @@ public abstract class AbsFragment<M extends AbsModel> extends Fragment
     }
 
     @Override
-    public synchronized IActivity getActivitySubscriber() {
+    public IActivity getActivitySubscriber() {
         if (validate()) {
             final Activity activity = getActivity();
             if (activity != null && IActivity.class.isInstance(activity)) {
@@ -128,7 +128,7 @@ public abstract class AbsFragment<M extends AbsModel> extends Fragment
     }
 
     @Override
-    public synchronized void exit() {
+    public void exit() {
     }
 
     @Override

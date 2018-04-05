@@ -36,7 +36,7 @@ public class NetImageProvider extends AbsProvider implements INetImageProvider {
     }
 
     @Override
-    public synchronized void request(final Request request) {
+    public void request(final Request request) {
         if (request != null && validate()) {
             SLUtil.getRequestModule().request(this, request);
         }
@@ -56,7 +56,7 @@ public class NetImageProvider extends AbsProvider implements INetImageProvider {
     public void onUnRegisterModule() {
     }
 
-    public synchronized void cancelRequests(ResponseListener listener) {
+    public void cancelRequests(ResponseListener listener) {
         SLUtil.getRequestModule().cancelRequests(this, listener);
     }
 
@@ -104,9 +104,7 @@ public class NetImageProvider extends AbsProvider implements INetImageProvider {
                                 if (event.getErrorHolder() > 0) {
                                     requestCreator.error(event.getErrorHolder());
                                 }
-                                requestCreator.networkPolicy(NetworkPolicy.NO_CACHE)
-                                        .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                                        .into(event.getView().get(), new Callback() {
+                                requestCreator.into(event.getView().get(), new Callback() {
                                             @Override
                                             public void onSuccess() {
                                             }

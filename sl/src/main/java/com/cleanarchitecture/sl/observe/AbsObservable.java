@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class AbsObservable<T> implements IObservable<T> {
     private Map<String, WeakReference<ObservableSubscriber>> mObservers = Collections.synchronizedMap(new ConcurrentHashMap<String, WeakReference<ObservableSubscriber>>());
 
-    private synchronized void checkNullObserver() {
+    private void checkNullObserver() {
         for (Map.Entry<String, WeakReference<ObservableSubscriber>> entry : mObservers.entrySet()) {
             if (entry.getValue() == null || entry.getValue().get() == null) {
                 mObservers.remove(entry.getKey());
@@ -28,7 +28,7 @@ public abstract class AbsObservable<T> implements IObservable<T> {
     }
 
     @Override
-    public synchronized void addObserver(ObservableSubscriber subscriber) {
+    public void addObserver(ObservableSubscriber subscriber) {
         if (subscriber == null) return;
 
         checkNullObserver();
@@ -41,7 +41,7 @@ public abstract class AbsObservable<T> implements IObservable<T> {
     }
 
     @Override
-    public synchronized void removeObserver(ObservableSubscriber subscriber) {
+    public void removeObserver(ObservableSubscriber subscriber) {
         if (subscriber == null) return;
 
         checkNullObserver();
@@ -58,7 +58,7 @@ public abstract class AbsObservable<T> implements IObservable<T> {
     }
 
     @Override
-    public synchronized void onChange(T object) {
+    public void onChange(T object) {
         for (WeakReference<ObservableSubscriber> ref : mObservers.values()) {
             if (ref != null && ref.get() != null) {
                 SLUtil.addMail(new OnChangeObservableMail<T>(ref.get().getName(), object));

@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.Surface;
@@ -70,6 +71,8 @@ public abstract class AbsActivity<M extends Model> extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         mStateObservable.setState(ViewStateObserver.STATE_CREATE);
 
@@ -249,7 +252,7 @@ public abstract class AbsActivity<M extends Model> extends AppCompatActivity
     }
 
     @Override
-    public synchronized void exit() {
+    public void exit() {
         if (ApplicationUtils.hasLollipop()) {
             super.finishAndRemoveTask();
         } else if (ApplicationUtils.hasJellyBean()) {
@@ -277,11 +280,11 @@ public abstract class AbsActivity<M extends Model> extends AppCompatActivity
     }
 
     @Override
-    public synchronized void onPermisionGranted(final String permission) {
+    public void onPermisionGranted(final String permission) {
     }
 
     @Override
-    public synchronized void onPermisionDenied(final String permission) {
+    public void onPermisionDenied(final String permission) {
     }
 
     @Override

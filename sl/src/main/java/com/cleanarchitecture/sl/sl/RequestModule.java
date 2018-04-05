@@ -67,7 +67,7 @@ public class RequestModule extends AbsModule implements IRequestModule {
     }
 
     @Override
-    public synchronized void cancelRequests(Object sender, ResponseListener listener) {
+    public void cancelRequests(Object sender, ResponseListener listener) {
         final IExecutor executor = mRequestDelegate.get(sender);
         if (executor != null) {
             executor.cancelRequests(listener);

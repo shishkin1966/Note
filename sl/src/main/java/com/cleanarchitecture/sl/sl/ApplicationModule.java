@@ -48,7 +48,7 @@ public abstract class ApplicationModule extends MultiDexApplication implements I
     }
 
     @Override
-    public synchronized void onApplicationUpdated(final int oldVersion, final int newVersion) {
+    public void onApplicationUpdated(final int oldVersion, final int newVersion) {
     }
 
     @Override

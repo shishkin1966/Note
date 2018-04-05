@@ -12,7 +12,7 @@ public abstract class AbsUnion<T extends ModuleSubscriber> extends AbsSmallUnion
     private WeakReference<T> mCurrentSubscriber;
 
     @Override
-    public synchronized void register(final T subscriber) {
+    public void register(final T subscriber) {
         if (subscriber == null) return;
 
         super.register(subscriber);
@@ -26,7 +26,7 @@ public abstract class AbsUnion<T extends ModuleSubscriber> extends AbsSmallUnion
 
 
     @Override
-    public synchronized void unregister(final T subscriber) {
+    public void unregister(final T subscriber) {
         if (subscriber == null) return;
 
         //if (!ApplicationModule.getInstance().isFinished()) {
@@ -46,21 +46,21 @@ public abstract class AbsUnion<T extends ModuleSubscriber> extends AbsSmallUnion
     }
 
     @Override
-    public synchronized void setCurrentSubscriber(final T subscriber) {
+    public void setCurrentSubscriber(final T subscriber) {
         if (subscriber != null) {
             mCurrentSubscriber = new WeakReference<>(subscriber);
         }
     }
 
     @Override
-    public synchronized T getCurrentSubscriber() {
+    public T getCurrentSubscriber() {
         if (mCurrentSubscriber != null && mCurrentSubscriber.get() != null) {
             return mCurrentSubscriber.get();
         }
         return getAnySubscriber();
     }
 
-    private synchronized T getAnySubscriber() {
+    private T getAnySubscriber() {
         final List<WeakReference<T>> list = getSubscribers();
         if (!list.isEmpty()) {
             if (list.size() == 1) {

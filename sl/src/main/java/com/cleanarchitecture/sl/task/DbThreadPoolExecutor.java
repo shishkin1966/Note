@@ -36,7 +36,7 @@ public class DbThreadPoolExecutor implements IExecutor {
         mExecutor = new RequestThreadPoolExecutor(mThreadCount, mMaxThreadCount, mKeepAliveTime, mUnit, queue);
     }
 
-    public synchronized void execute(final Request request) {
+    public void execute(final Request request) {
         mExecutor.addRequest(request);
     }
 
@@ -48,11 +48,11 @@ public class DbThreadPoolExecutor implements IExecutor {
     public void clear() {
     }
 
-    public synchronized void cancelRequests(ResponseListener listener) {
+    public void cancelRequests(ResponseListener listener) {
         mExecutor.cancelRequests(listener);
     }
 
-    public synchronized boolean isShutdown() {
+    public boolean isShutdown() {
         return mExecutor.isShutdown();
     }
 

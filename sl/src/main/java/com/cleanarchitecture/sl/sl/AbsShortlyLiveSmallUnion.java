@@ -27,12 +27,12 @@ public abstract class AbsShortlyLiveSmallUnion<T extends ModuleSubscriber> exten
     }
 
     @Override
-    public synchronized void onUnRegisterLastSubscriber() {
+    public void onUnRegisterLastSubscriber() {
         mServiceHandler.post(true);
     }
 
     @Override
-    public synchronized void onShutdown(AutoCompleteHandler handler) {
+    public void onShutdown(AutoCompleteHandler handler) {
         if (!hasSubscribers()) {
             SL.getInstance().unregisterModule(getName());
         }

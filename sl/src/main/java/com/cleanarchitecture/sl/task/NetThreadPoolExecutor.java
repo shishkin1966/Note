@@ -116,7 +116,7 @@ public class NetThreadPoolExecutor implements IExecutor, ObservableSubscriber<In
         }
     }
 
-    public synchronized void execute(final Request request) {
+    public void execute(final Request request) {
         mExecutor.addRequest(request);
     }
 
@@ -130,11 +130,11 @@ public class NetThreadPoolExecutor implements IExecutor, ObservableSubscriber<In
     public void clear() {
     }
 
-    public synchronized void cancelRequests(ResponseListener listener) {
+    public void cancelRequests(ResponseListener listener) {
         mExecutor.cancelRequests(listener);
     }
 
-    public synchronized boolean isShutdown() {
+    public boolean isShutdown() {
         return mExecutor.isShutdown();
     }
 

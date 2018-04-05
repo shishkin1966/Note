@@ -49,7 +49,7 @@ public class MailUnion extends AbsSmallUnion<MailSubscriber> implements IMailUni
     }
 
     @Override
-    public synchronized List<Mail> getMail(final MailSubscriber subscriber) {
+    public List<Mail> getMail(final MailSubscriber subscriber) {
         if (subscriber != null) {
             if (mMail.isEmpty()) {
                 return new ArrayList<>();
@@ -76,7 +76,7 @@ public class MailUnion extends AbsSmallUnion<MailSubscriber> implements IMailUni
     }
 
     @Override
-    public synchronized void clearMail(final MailSubscriber subscriber) {
+    public void clearMail(final MailSubscriber subscriber) {
         if (subscriber != null) {
             if (mMail.isEmpty()) {
                 return;
@@ -93,7 +93,7 @@ public class MailUnion extends AbsSmallUnion<MailSubscriber> implements IMailUni
     }
 
     @Override
-    public synchronized void addMail(final Mail mail) {
+    public void addMail(final Mail mail) {
         if (mail != null) {
             final List<String> list = mail.getCopyTo();
             list.add(mail.getAddress());
@@ -132,7 +132,7 @@ public class MailUnion extends AbsSmallUnion<MailSubscriber> implements IMailUni
         }
     }
 
-    private synchronized void removeDublicate(final Mail mail) {
+    private void removeDublicate(final Mail mail) {
         if (mail != null && !StringUtils.isNullOrEmpty(mail.getName()) && !StringUtils.isNullOrEmpty(mail.getAddress())) {
             for (Mail tmpMail : mMail.values()) {
                 if (tmpMail != null) {
@@ -145,7 +145,7 @@ public class MailUnion extends AbsSmallUnion<MailSubscriber> implements IMailUni
     }
 
     @Override
-    public synchronized void removeMail(final Mail mail) {
+    public void removeMail(final Mail mail) {
         if (mail != null) {
             if (mMail.containsKey(mail.getId())) {
                 mMail.remove(mail.getId());
@@ -154,12 +154,12 @@ public class MailUnion extends AbsSmallUnion<MailSubscriber> implements IMailUni
     }
 
     @Override
-    public synchronized void clearMail() {
+    public void clearMail() {
         mMail.clear();
     }
 
     @Override
-    public synchronized void onFinishApplication() {
+    public void onFinishApplication() {
         clearMail();
     }
 

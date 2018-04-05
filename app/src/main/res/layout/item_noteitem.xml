@@ -23,7 +23,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_12dp"
                 android:textColor="@color/text_dark"
-                android:textSize="@dimen/text_size_large"/>
+                android:textSize="@dimen/text_size_xlarge"/>
 
             <EditText
                 android:id="@+id/title"
@@ -37,7 +37,7 @@
                 android:backgroundTint="@color/transparent"
                 android:inputType="text|textCapSentences|textMultiLine"
                 android:textColor="@color/text_dark"
-                android:textSize="@dimen/text_size_large"/>
+                android:textSize="@dimen/text_size_xlarge"/>
 
         </LinearLayout>
 

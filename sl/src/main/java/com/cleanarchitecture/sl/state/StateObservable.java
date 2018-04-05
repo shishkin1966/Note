@@ -14,7 +14,7 @@ public class StateObservable implements Stateable {
     }
 
     @Override
-    public synchronized void setState(final int state) {
+    public void setState(final int state) {
         mState = state;
         for (WeakReference<Stateable> stateable : mList) {
             if (stateable != null && stateable.get() != null) {
@@ -23,7 +23,7 @@ public class StateObservable implements Stateable {
         }
     }
 
-    public synchronized int getState() {
+    public int getState() {
         return mState;
     }
 
@@ -32,7 +32,7 @@ public class StateObservable implements Stateable {
      *
      * @param stateable слушатель состояний
      */
-    public synchronized void addObserver(final Stateable stateable) {
+    public void addObserver(final Stateable stateable) {
         if (stateable != null) {
             for (WeakReference<Stateable> ref : mList) {
                 if (ref != null && ref.get() != null) {
@@ -52,7 +52,7 @@ public class StateObservable implements Stateable {
      *
      * @param stateable слушатель состояний
      */
-    public synchronized void removeObserver(final Stateable stateable) {
+    public void removeObserver(final Stateable stateable) {
         for (WeakReference<Stateable> ref : mList) {
             if (ref != null && ref.get() != null) {
                 if (ref.get() == stateable) {
@@ -66,7 +66,7 @@ public class StateObservable implements Stateable {
     /**
      * Удалить всех слушателей
      */
-    public synchronized void clear() {
+    public void clear() {
         mList.clear();
     }
 

@@ -10,6 +10,7 @@ import com.cleanarchitecture.sl.request.ResponseListener;
 import com.cleanarchitecture.sl.sl.SLUtil;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -74,10 +75,16 @@ public class NotesPresenter extends AbsPresenter<NotesModel> implements View.OnC
 
     public void onNotesChanged() {
         final List<Note> items = getModel().getView().getItems();
+        final List<Note> modified = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
-            items.get(i).setPoradok(i);
+            if (i != items.get(i).getPoradok()) {
+                items.get(i).setPoradok(i);
+                modified.add(items.get(i));
+            }
         }
-        getModel().getInteractor().updateNotes(items);
+        if (!modified.isEmpty()) {
+            getModel().getInteractor().updateNotes(modified);
+        }
     }
 
 

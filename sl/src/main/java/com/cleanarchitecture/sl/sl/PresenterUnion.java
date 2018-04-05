@@ -27,7 +27,7 @@ public class PresenterUnion extends AbsUnion<Presenter>
     }
 
     @Override
-    public synchronized void register(final Presenter subscriber) {
+    public void register(final Presenter subscriber) {
         if (subscriber != null && subscriber.isRegister()) {
             super.register(subscriber);
         }
@@ -39,36 +39,36 @@ public class PresenterUnion extends AbsUnion<Presenter>
     }
 
     @Override
-    public synchronized void saveStateData(final Presenter presenter, final Bundle state) {
+    public void saveStateData(final Presenter presenter, final Bundle state) {
         if (state != null && !ApplicationModule.getInstance().isFinished()) {
             mStates.put(presenter.getName(), state);
         }
     }
 
     @Override
-    public synchronized Bundle restoreStateData(final Presenter presenter) {
+    public Bundle restoreStateData(final Presenter presenter) {
         return mStates.get(presenter.getName());
     }
 
     @Override
-    public synchronized void clearStateData(final Presenter presenter) {
+    public void clearStateData(final Presenter presenter) {
         mStates.remove(presenter.getName());
     }
 
     @Override
-    public synchronized void clearStateData() {
+    public void clearStateData() {
         mStates.clear();
     }
 
     @Override
-    public synchronized void onUnRegisterLastSubscriber() {
+    public void onUnRegisterLastSubscriber() {
         if (ApplicationModule.getInstance().isFinished()) {
             clearStateData();
         }
     }
 
     @Override
-    public synchronized void onFinishApplication() {
+    public void onFinishApplication() {
         for (WeakReference<Presenter> ref : getSubscribers()) {
             unregister(ref.get());
         }
