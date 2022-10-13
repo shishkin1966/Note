@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.widget.AppCompatButton;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -36,8 +36,8 @@ import com.cleanarchitecture.sl.ui.activity.IActivity;
 import com.cleanarchitecture.sl.ui.dialog.DialogResultListener;
 import com.cleanarchitecture.sl.ui.dialog.MaterialDialogExt;
 import com.cleanarchitecture.sl.ui.fragment.AbsContentFragment;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+//import com.google.android.gms.common.ConnectionResult;
+//import com.google.android.gms.common.GoogleApiAvailability;
 
 
 import java.lang.ref.WeakReference;
@@ -125,6 +125,10 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
 
     @Override
     public void checkGooglePlayServices() {
+    }
+/*
+    @Override
+    public void checkGooglePlayServices() {
         final IActivity subscriber = getCurrentSubscriber();
         if (subscriber != null && subscriber.validate()) {
             if (subscriber.getActivity().getState() == ViewStateObserver.STATE_RESUME || subscriber.getActivity().getState() == ViewStateObserver.STATE_PAUSE) {
@@ -140,7 +144,7 @@ public class ActivityUnion extends AbsUnion<IActivity> implements IActivityUnion
             }
         }
     }
-
+*/
     @Override
     public void grantPermission(String permission, String helpMessage) {
         if (ApplicationUtils.hasMarshmallow()) {

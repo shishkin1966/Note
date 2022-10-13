@@ -1,6 +1,6 @@
 package com.cleanarchitecture.sl.request;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public abstract class AbsRequest implements Request {
 

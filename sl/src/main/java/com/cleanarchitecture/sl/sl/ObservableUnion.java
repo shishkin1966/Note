@@ -1,6 +1,6 @@
 package com.cleanarchitecture.sl.sl;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.cleanarchitecture.common.utils.StringUtils;
 import com.cleanarchitecture.sl.observe.IObservable;

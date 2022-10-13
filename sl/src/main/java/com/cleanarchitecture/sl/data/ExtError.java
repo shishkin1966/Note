@@ -1,6 +1,6 @@
 package com.cleanarchitecture.sl.data;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.cleanarchitecture.common.utils.StringUtils;
 

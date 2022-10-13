@@ -2,7 +2,7 @@ package com.cleanarchitecture.common.collection;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * LongArrayList holds longs to Objects. It is intended to be more memory efficient

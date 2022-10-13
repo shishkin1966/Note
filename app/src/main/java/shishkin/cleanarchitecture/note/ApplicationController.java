@@ -1,6 +1,8 @@
 package shishkin.cleanarchitecture.note;
 
+import android.content.Context;
 import android.os.Environment;
+import androidx.multidex.MultiDexApplication;
 
 import com.cleanarchitecture.sl.sl.ApplicationModule;
 import com.cleanarchitecture.sl.sl.SLUtil;
@@ -21,8 +23,8 @@ public class ApplicationController extends ApplicationModule {
     public static final String ACTION_LIST_CLICK = BuildConfig.APPLICATION_ID + ".ACTION_LIST_CLICK";
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onStartApplication() {
+        super.onStartApplication();
 
         SLUtil.getDbProvider().getDb(NotesDb.class, NotesDb.NAME);
 

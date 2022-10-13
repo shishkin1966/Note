@@ -1,6 +1,6 @@
 package com.cleanarchitecture.sl.presenter.impl;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.cleanarchitecture.sl.R;
 import com.cleanarchitecture.sl.presenter.AbsPresenter;

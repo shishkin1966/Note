@@ -1,8 +1,8 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.internal.application'
 
 def supportLibVersion = "26.0.2"
-def compileSdk = 26
-def buildTools = "27.0.3"
+def compileSdk = 30
+def buildTools = "26.0.2"
 def minSdk = 18
 def targetSdk = 26
 
@@ -61,24 +61,30 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // логирование приложениия
-    compile 'com.github.snowdream.android.util:log:1.2.0'
+    implementation 'com.github.snowdream.android.util:log:1.2.0'
 
     implementation project(':sl')
     implementation project(':common')
 
     // БД ROOM
-    compile 'android.arch.persistence.room:runtime:1.0.0';
-    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0';
+    implementation 'androidx.room:room-runtime:2.0.0';
+    annotationProcessor 'androidx.room:room-compiler:2.0.0';
 
     // FAB
-    compile 'com.github.clans:fab:1.6.4'
+    implementation 'com.github.clans:fab:1.6.4'
 
     // добавление ripple эффекта
-    compile 'com.balysv:material-ripple:1.0.2'
+    implementation 'com.balysv:material-ripple:1.0.2'
 
     // Date picker
-    compile 'com.github.drawers:SpinnerDatePicker:1.0.6'
+    implementation 'com.github.drawers:SpinnerDatePicker:1.0.6'
 
     // Time picker
-    compile 'com.github.philliphsu:numberpadtimepicker:1.1.1'
+    implementation 'com.github.philliphsu:numberpadtimepicker:1.1.1'
+
+    // поддержка multidex на Android 4.*
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    // сериализация
+    implementation 'com.google.code.gson:gson:2.8.2'
 }

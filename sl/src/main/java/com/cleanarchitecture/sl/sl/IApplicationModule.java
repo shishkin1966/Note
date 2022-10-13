@@ -67,7 +67,7 @@ public interface IApplicationModule extends Module {
     /**
      * Событие  - старт приложениея
      */
-    void onStart();
+    void onStartApplication();
 
     /**
      * Остановить приложение

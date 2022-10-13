@@ -1,7 +1,7 @@
 package com.cleanarchitecture.sl.repository;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.cleanarchitecture.common.utils.ApplicationUtils;
 import com.cleanarchitecture.sl.data.Result;
@@ -11,7 +11,6 @@ import com.cleanarchitecture.sl.request.ResponseListener;
 import com.cleanarchitecture.sl.sl.ApplicationModule;
 import com.cleanarchitecture.sl.sl.SLUtil;
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;

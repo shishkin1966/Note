@@ -1,10 +1,10 @@
 package com.cleanarchitecture.common.ui;
 
 import android.content.Context;
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
+import androidx.annotation.CheckResult;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import com.google.android.material.snackbar.Snackbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -35,7 +35,7 @@ public class BaseSnackbar {
                                 final int type) {
         final Snackbar snackbar = Snackbar.make(view, title, duration);
         final View snackbarView = snackbar.getView();
-        final TextView textView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        final TextView textView = snackbarView.findViewById(R.id.snackbar_text);
         textView.setTextColor(ViewUtils.getColor(view.getContext(), R.color.white));
         if (ViewUtils.diagonalInch(view.getContext()) < 5) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ViewUtils.getDimensionPx(view.getContext(), R.dimen.text_size));

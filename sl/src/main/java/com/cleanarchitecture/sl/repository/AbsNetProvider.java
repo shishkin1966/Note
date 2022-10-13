@@ -1,7 +1,7 @@
 package com.cleanarchitecture.sl.repository;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.cleanarchitecture.sl.data.Result;
 import com.cleanarchitecture.sl.request.Request;

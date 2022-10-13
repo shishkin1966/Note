@@ -1,6 +1,6 @@
 package com.cleanarchitecture.sl.event.navigation;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.cleanarchitecture.sl.R;
 import com.cleanarchitecture.sl.event.AbsEvent;
