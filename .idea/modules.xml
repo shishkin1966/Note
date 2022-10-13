@@ -3,9 +3,18 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CleanArchitecture.note.iml" filepath="$PROJECT_DIR$/CleanArchitecture.note.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sl/sl.iml" filepath="$PROJECT_DIR$/sl/sl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CleanArchitecture.note.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/CleanArchitecture.note.common.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.iml" filepath="$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sl/CleanArchitecture.note.sl.unitTest.iml" />
     </modules>
   </component>
 </project>

@@ -1,9 +1,8 @@
 package com.cleanarchitecture.sl.event.ui;
 
-import android.support.design.widget.Snackbar;
-
 import com.cleanarchitecture.common.ui.BaseSnackbar;
 import com.cleanarchitecture.sl.event.AbsEvent;
+import com.google.android.material.snackbar.Snackbar;
 
 
 /**

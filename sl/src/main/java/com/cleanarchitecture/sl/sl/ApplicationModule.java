@@ -4,9 +4,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.cleanarchitecture.sl.BuildConfig;
 import com.cleanarchitecture.sl.data.Result;
@@ -23,7 +23,7 @@ public abstract class ApplicationModule extends MultiDexApplication implements I
 
     public static final String NAME = ApplicationModule.class.getName();
     private static final String EXTERNAL_STORAGE_APPLICATION_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() +
-            File.separator + BuildConfig.APPLICATION_ID + File.separator;
+            File.separator + BuildConfig.LIBRARY_PACKAGE_NAME + File.separator;
     private static String[] PERMISIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_COARSE_LOCATION};
     private static volatile ApplicationModule sInstance;
     private static volatile ApplicationLifecycleHandler sHandler;
@@ -49,11 +49,6 @@ public abstract class ApplicationModule extends MultiDexApplication implements I
 
     @Override
     public void onApplicationUpdated(final int oldVersion, final int newVersion) {
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
     }
 
     @Override
@@ -121,11 +116,11 @@ public abstract class ApplicationModule extends MultiDexApplication implements I
 
         sInstance = this;
 
-        onStart();
+        onStartApplication();
     }
 
     @Override
-    public void onStart() {
+    public void onStartApplication() {
 
         SL.instantiate();
 

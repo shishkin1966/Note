@@ -1,9 +1,9 @@
 package com.cleanarchitecture.sl.sl;
 
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.RoomDatabase;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 
 import com.cleanarchitecture.common.utils.SafeUtils;
 import com.cleanarchitecture.sl.mail.Mail;
@@ -15,8 +15,8 @@ import com.cleanarchitecture.sl.state.ViewStateObserver;
 import com.cleanarchitecture.sl.ui.activity.AbsActivity;
 import com.cleanarchitecture.sl.ui.activity.AbsContentActivity;
 import com.cleanarchitecture.sl.ui.fragment.AbsContentFragment;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+//import com.google.android.gms.common.ConnectionResult;
+//import com.google.android.gms.common.GooglePlayServicesUtil;
 
 
 import java.util.List;
@@ -163,9 +163,14 @@ public class SLUtil {
         return null;
     }
 
+    public static boolean isGooglePlayServices() {
+        return true;
+    }
+
     /**
      * Контролировать наличие и версию Google Play Services
      */
+/*
     public static boolean isGooglePlayServices() {
         final Context context = ApplicationModule.getInstance().getApplicationContext();
         if (context != null) {
@@ -176,6 +181,7 @@ public class SLUtil {
         }
         return false;
     }
+*/
 
     /**
      * Проверить разрешение права приложения

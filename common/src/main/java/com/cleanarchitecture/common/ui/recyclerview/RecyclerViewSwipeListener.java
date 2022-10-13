@@ -1,6 +1,6 @@
 package com.cleanarchitecture.common.ui.recyclerview;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 public interface RecyclerViewSwipeListener {
 

@@ -3,6 +3,8 @@ package com.cleanarchitecture.sl.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 
+import androidx.fragment.app.Fragment;
+
 /**
  * Callback to receive result of activity launch.
  */
@@ -24,7 +26,7 @@ public interface ActivityResultListener {
      * @param data        An Intent, which can return result data to the caller
      *                    (various data can be attached to Intent "extras").
      * @see Activity#startActivityForResult
-     * @see android.support.v4.app.Fragment#startActivityForResult
+     * @see Fragment#startActivityForResult
      * @see Activity#createPendingResult
      * @see Activity#setResult(int)
      */

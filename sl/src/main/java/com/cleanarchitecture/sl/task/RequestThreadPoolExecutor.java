@@ -1,6 +1,6 @@
 package com.cleanarchitecture.sl.task;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.cleanarchitecture.common.utils.SafeUtils;
 import com.cleanarchitecture.sl.request.Request;

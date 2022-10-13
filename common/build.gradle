@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 def supportLibVersion = "26.0.2"
-def compileSdk = 26
-def buildTools = "27.0.3"
+def compileSdk = 30
+def buildTools = "30.0.3"
 def minSdk = 15
 def targetSdk = 26
 def playServices = "11.2.0"
@@ -52,19 +52,20 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // логирование приложениия
-    compile 'com.github.snowdream.android.util:log:1.2.0'
+    implementation 'com.github.snowdream.android.util:log:1.2.0'
 
     // Легковесный Stream API
-    compile 'com.annimon:stream:1.1.9'
-    compile "com.google.android.gms:play-services-base:$playServices"
-    compile "com.google.android.gms:play-services-maps:$playServices"
-    compile "com.google.android.gms:play-services-location:$playServices"
-    compile 'com.google.maps.android:android-maps-utils:0.5'
-    compile "com.android.support:design:$supportLibVersion"
+    implementation 'com.annimon:stream:1.1.9'
+
+    implementation "com.google.android.gms:play-services-base:$playServices"
+    implementation "com.google.android.gms:play-services-maps:$playServices"
+    implementation "com.google.android.gms:play-services-location:$playServices"
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation 'com.google.android.material:material:1.0.0'
 
     // Toastы
-    compile 'com.github.GrenderG:Toasty:1.2.8'
+    implementation 'com.github.GrenderG:Toasty:1.2.8'
 
     // FAB
-    compile 'com.github.clans:fab:1.6.4'
+    implementation 'com.github.clans:fab:1.6.4'
 }
