@@ -7,7 +7,6 @@ def minSdk = 15
 def targetSdk = 26
 
 android {
-    buildToolsVersion buildTools
     compileSdkVersion compileSdk
 
     configurations.all {
@@ -30,8 +29,6 @@ android {
     defaultConfig {
         minSdkVersion minSdk
         targetSdkVersion targetSdk
-        versionCode 1
-        versionName "1.0"
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -46,6 +43,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.cleanarchitecture.sl'
 }
 
 dependencies {
