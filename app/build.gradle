@@ -8,7 +8,6 @@ def targetSdk = 26
 
 android {
     compileSdkVersion compileSdk
-    buildToolsVersion buildTools
 
     configurations.all {
         resolutionStrategy.force "com.android.support:support-annotations:$supportLibVersion"
@@ -55,6 +54,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'shishkin.cleanarchitecture.note'
 }
 
 dependencies {
